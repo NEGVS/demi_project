@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${package.Mapper}.${table.mapperName}">
+
+    #if(${enableCache})
+        <!-- 开启二级缓存 -->
+        <cache type="${cacheClassName}"/>
+    #end
+
+    #if(${baseResultMap})
+        <!-- 通用查询映射结果 -->
+        <resultMap id="BaseResultMap" type="${package.Entity}.${entity}">
+            #foreach($field in ${table.fields})
+                #if(${field.keyFlag})##生成主键排在第一位
+                    <id column="${field.name}" property="${field.propertyName}" />
+                #end
+            #end
+            #foreach($field in ${table.commonFields})##生成公共字段
+                <result column="${field.name}" property="${field.propertyName}" />
+            #end
+            #foreach($field in ${table.fields})
+                #if(!${field.keyFlag})##生成普通字段
+                    <result column="${field.name}" property="${field.propertyName}" />
+                #end
+            #end
+        </resultMap>
+    #end
+
+    #if(${baseColumnList})
+        <!-- 通用查询结果列 -->
+        <sql id="Base_Column_List">
+                #foreach($field in ${table.commonFields})
+                    ${field.columnName},
+                #end
+                ${table.fieldNames}
+        </sql>
+    #end
+
+    <!-- 基础增删改查操作 -->
+    <!-- 插入数据 -->
+    <insert id="insert" keyProperty="#foreach($field in ${table.fields})#if(${field.keyFlag})${field.columnName}#end#end" useGeneratedKeys="true" parameterType="${package.Entity}.${entity}">
+        insert into ${table.name} (<include refid="Base_Column_List"/>)
+        values(
+        #foreach($field in ${table.commonFields})
+            #{${field.propertyName}}
+        #end
+        #{${table.fieldNames}}
+        )
+    </insert>
+
+
+    <!-- 根据主键查询 -->
+    <select id="selectById" resultType="${package.Entity}.${entity}">
+        SELECT
+        <include refid="Base_Column_List"/>
+        <!-- 表名称 -->
+        FROM ${table.name}
+        WHERE  #foreach($field in ${table.fields})#if(${field.keyFlag})${field.columnName} = #{${field.propertyName}} #end #end
+    </select>
+
+    <!-- 查询带查询条件 -->
+    <select id="selectAll" resultType="${package.Entity}.${entity}">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ${table.name}
+        <where>
+            #foreach($field in ${table.fields})
+                #if(!${field.keyFlag}) ## 跳过主键字段
+                    <if test="#if(${field.propertyType} == 'String') ${field.propertyName} != null and ${field.propertyName} != '' #else ${field.propertyName} != null#end">
+                       and  ${field.columnName} = #{${field.propertyName}}
+                    </if>
+                #end
+            #end
+        </where>
+    </select>
+
+    <!-- 更新 -->
+    <update id="updateById" parameterType="${package.Entity}.${entity}">
+        UPDATE ${table.name}
+        <set>
+            #foreach($field in ${table.fields})
+                #if(!${field.keyFlag}) ## 跳过主键字段
+                    <if test="#if(${field.propertyType} == 'String') ${field.propertyName} != null and ${field.propertyName} != '' #else ${field.propertyName} != null#end">
+                        ${field.columnName} = #{${field.propertyName}}#if($foreach.hasNext),#end
+                    </if>
+                #end
+            #end
+        </set>
+        WHERE  #foreach($field in ${table.fields})#if(${field.keyFlag})${field.columnName} = #{${field.propertyName}} #end #end
+    </update>
+
+    <!-- 删除 -->
+    <delete id="deleteById" parameterType="${package.Entity}.${entity}">
+          DELETE  from ${table.name}
+          where #foreach($field in ${table.fields})#if(${field.keyFlag})${field.columnName} = #{${field.propertyName}} #end #end
+    </delete>
+
+</mapper>

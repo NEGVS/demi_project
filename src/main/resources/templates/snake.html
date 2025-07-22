@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>贪吃蛇游戏</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+.game-container {
+  text-align: center;
+}
+
+canvas {
+  background-color: #000;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #fff;
+}
+
+.controls {
+  margin-top: 10px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+@media (max-width: 600px) {
+  canvas {
+    width: 100%;
+    height: auto;
+  }
+}
+
+</style>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <h1>贪吃蛇游戏</h1>
+    <canvas id="gameCanvas"></canvas>
+    <div class="controls">
+      <button id="pauseButton">暂停</button>
+      <button id="restartButton" style="display:none;">重新开始</button>
+    </div>
+    <div>
+      <p>分数: <span id="score">0</span></p>
+    </div>
+  </div>
+  <script >
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+const scoreDisplay = document.getElementById('score');
+const pauseButton = document.getElementById('pauseButton');
+const restartButton = document.getElementById('restartButton');
+
+const gridSize = 20;
+const canvasSize = 400; // 固定大小的画布
+canvas.width = canvasSize;
+canvas.height = canvasSize;
+
+let snake = [
+  { x: 80, y: 80 },
+  { x: 60, y: 80 },
+  { x: 40, y: 80 }
+];
+let direction = 'right';
+let food = { x: 200, y: 200 };
+let score = 0;
+let gameInterval;
+let gamePaused = false;
+
+function drawGame() {
+  if (gamePaused) return;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // 绘制蛇
+  snake.forEach(segment => {
+    ctx.fillStyle = 'lime';
+    ctx.fillRect(segment.x, segment.y, gridSize, gridSize);
+  });
+
+  // 绘制食物
+  ctx.fillStyle = 'red';
+  ctx.fillRect(food.x, food.y, gridSize, gridSize);
+
+  // 更新蛇的位置
+  const head = { ...snake[0] };
+
+  if (direction === 'right') head.x += gridSize;
+  if (direction === 'left') head.x -= gridSize;
+  if (direction === 'up') head.y -= gridSize;
+  if (direction === 'down') head.y += gridSize;
+
+  snake.unshift(head);
+
+  // 检测碰撞
+  if (head.x < 0 || head.x >= canvasSize || head.y < 0 || head.y >= canvasSize || isSnakeCollidingWithItself(head)) {
+    endGame();
+    return;
+  }
+
+  // 吃到食物
+  if (head.x === food.x && head.y === food.y) {
+    score++;
+    scoreDisplay.innerText = score;
+    generateFood();
+  } else {
+    snake.pop();
+  }
+  
+  // 继续绘制
+  setTimeout(drawGame, 160);
+}
+
+function isSnakeCollidingWithItself(head) {
+  return snake.some((segment, index) => index !== 0 && segment.x === head.x && segment.y === head.y);
+}
+
+function generateFood() {
+  food = {
+    x: Math.floor(Math.random() * (canvasSize / gridSize)) * gridSize,
+    y: Math.floor(Math.random() * (canvasSize / gridSize)) * gridSize
+  };
+}
+
+function startGame() {
+  snake = [
+    { x: 80, y: 80 },
+    { x: 60, y: 80 },
+    { x: 40, y: 80 }
+  ];
+  direction = 'right';
+  score = 0;
+  scoreDisplay.innerText = score;
+  gamePaused = false;
+  restartButton.style.display = 'none';
+  drawGame();
+}
+
+function pauseGame() {
+  gamePaused = !gamePaused;
+  if (gamePaused) {
+    pauseButton.innerText = '继续';
+  } else {
+    pauseButton.innerText = '暂停';
+    drawGame();
+  }
+}
+
+function endGame() {
+  clearTimeout(gameInterval);
+  restartButton.style.display = 'block';
+  pauseButton.disabled = true;
+}
+
+function restartGame() {
+  startGame();
+  restartButton.style.display = 'none';
+  pauseButton.disabled = false;
+}
+
+function handleKeyPress(event) {
+  if (gamePaused) return;
+
+  if (event.key === 'ArrowRight' && direction !== 'left') {
+    direction = 'right';
+  }
+  if (event.key === 'ArrowLeft' && direction !== 'right') {
+    direction = 'left';
+  }
+  if (event.key === 'ArrowUp' && direction !== 'down') {
+    direction = 'up';
+  }
+  if (event.key === 'ArrowDown' && direction !== 'up') {
+    direction = 'down';
+  }
+}
+
+document.addEventListener('keydown', handleKeyPress);
+pauseButton.addEventListener('click', pauseGame);
+restartButton.addEventListener('click', restartGame);
+
+startGame();
+
+</script>
+</body>
+</html>

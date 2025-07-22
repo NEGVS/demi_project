@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>统计</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0f2f5 100%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 90%;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        select, input {
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            width: 10rem;
+            background-color: #f9fafb;
+        }
+
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="gray" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1rem;
+        }
+
+        input {
+            -moz-appearance: textfield;
+        }
+
+        input::-webkit-inner-spin-button,
+        input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            background-color: #34d399;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        button:hover {
+            background-color: #2cc0a0;
+        }
+
+        #copyButton {
+            background-color: #3b82f6;
+            margin-top: 1rem;
+        }
+
+        #copyButton:hover {
+            background-color: #2563eb;
+        }
+
+        #result {
+            background-color: #f9fafb;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: left;
+            white-space: pre-wrap;
+            font-size: 1rem;
+            line-height: 1.5;
+            max-height: 60vh;
+            overflow-y: auto;
+            border: 1px solid #e5e7eb;
+            margin-top: 1rem;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .error {
+            color: #ef4444;
+            font-size: 0.9rem;
+            margin-top: 0.75rem;
+        }
+
+        #copyArea {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+                max-width: 95%;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            select, input {
+                width: 8rem;
+                font-size: 0.9rem;
+                padding: 0.6rem;
+            }
+
+            button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+
+            #result {
+                font-size: 0.9rem;
+                max-height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>统计</h1>
+    <div class="input-group">
+        <input type="text" id="userWxId" placeholder="微信ID">
+        <select id="activeType">
+            <option value="1" selected>日活跃</option>
+            <option value="2">月活跃</option>
+            <option value="3">金币</option>
+            <option value="4">魅力</option>
+        </select>
+        <button id="fetchButton">查询</button>
+    </div>
+    <div id="result">请输入微信ID并选择类型以查询数据</div>
+    <button id="copyButton" onclick="copyToClipboard()" style="display: none;">一键复制</button>
+    <div id="error" class="error"></div>
+</div>
+<textarea id="copyArea"></textarea>
+
+<script>
+    // 定义房间数据数组，包含房间名称和对应的 wxRoomId
+    const tempData = [
+        {name: '书棋', code: 7940},
+        {name: '书月', code: 7938},
+        {name: '书画', code: 7939},
+        {name: '书柠', code: 7941},
+        {name: '书屿', code: 7942},
+        {name: '诗意', code: 7943},
+        {name: '书栀', code: 7953},
+        {name: '书聆', code: 7980},
+    ];
+
+    // 将数字格式化为中文单位（亿、万），截断到两位小数，不四舍五入，并去掉末尾无效的零
+    function formatChineseNumber(number) {
+        const num = Number(number);
+        const absNum = Math.abs(num);
+        let suffix = '';
+        let divisor = 1;
+
+        // 判断数值大小，确定单位和除数
+        if (absNum >= 100000000) {
+            divisor = 100000000;
+            suffix = '亿';
+        } else if (absNum >= 10000) {
+            divisor = 10000;
+            suffix = '万';
+        }
+
+        // 如果需要单位转换
+        if (suffix) {
+            // 除以对应单位并截断到两位小数（不四舍五入）
+            const value = Math.floor((num / divisor) * 100) / 100;
+            // 格式化为字符串并去掉末尾无效的零
+            const formatted = value.toFixed(2).replace(/\.?0+$/, '');
+            return formatted + suffix;
+        }
+
+        // 小于万的数字直接返回
+        return num.toString();
+    }
+
+    // 为“查询”按钮添加点击事件监听器
+    document.getElementById('fetchButton').addEventListener('click', async () => {
+        // 获取 DOM 元素
+        const resultElement = document.getElementById('result');
+        const errorElement = document.getElementById('error');
+        const copyButton = document.getElementById('copyButton');
+        const userWxId = document.getElementById('userWxId').value.trim();
+        const activeType = document.getElementById('activeType').value;
+
+        // 初始化 UI
+        resultElement.textContent = '正在请求数据...';
+        errorElement.textContent = '';
+        copyButton.style.display = 'none';
+        // 定义一个list
+
+
+        try {
+            // 验证微信 ID 是否输入
+            if (!userWxId) {
+                throw new Error('请输入微信ID');
+            }
+
+            // 定义格式化配置，根据 activeType 确定筛选和格式化规则
+            const typeConfig = {
+                1: {
+                    key: 'msgCount',
+                    min: 100,
+                    format: (item, roomName) => `${roomName} ${item.msgCount}`
+                },
+                2: {
+                    key: 'monthMsgCount',
+                    min: 3000,
+                    format: (item, roomName) => `${roomName} ${item.monthMsgCount}】`
+                },
+                3: {
+                    key: 'corn',
+                    min: 1,
+                    format: (item, roomName) => `${roomName} 【${formatChineseNumber(item.corn)}】 `
+                },
+                4: {
+                    key: 'charm',
+                    min: 1,
+                    format: (item, roomName) => `${roomName} 【${formatChineseNumber(item.charm)}】 `
+                }
+            };
+
+            // 获取当前选择的配置
+            const config = typeConfig[activeType];
+            let result = '';
+            let userFound = false;
+            let list = [];
+
+            // 遍历所有房间，依次查询数据
+            for (const tempItem of tempData) {
+                // 步骤 1：获取 cookie（确保请求头正确）
+                await fetch(`https://space.robotcy.cn:18082/mini_api/wxRoom/selectRoom?wxRoomId=${tempItem.code}`);
+
+                // 步骤 2：发送 POST 请求获取房间用户数据
+                const postData = {
+                    pageSize: 250,
+                    pageNum: 1,
+                    wxRoomId: tempItem.code,
+                    type: 10,
+                    hytype: activeType
+                };
+
+                const response = await fetch('https://space.robotcy.cn:18082/mini_api/wxRoom/selectRoomUser', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(postData)
+                });
+
+                // 检查响应状态
+                if (!response.ok) {
+                    throw new Error(`请求失败，状态码：${response.status}`);
+                }
+
+                const data = await response.json();
+                if (!data.data?.list) {
+                    continue; // 如果没有数据，跳过当前房间
+                }
+
+                // 筛选出符合微信 ID 且满足最低阈值的用户
+                const userData = data.data.list
+                    .filter(item => item.userWxId === userWxId);
+
+                // 如果找到用户，格式化并添加到结果中
+                userData.forEach(item => {
+                    userFound = true;
+                    // 根据类型，将不同的值添加到list中
+                    // 如果是“活跃度”类型，则需要根据不同的值进行不同的处理
+                    if (activeType == 1) {
+                        list.push(item.msgCount);
+                    } else if (activeType == 2) {
+                        list.push(item.monthMsgCount);
+                    } else if (activeType == 3) {
+                        list.push(item.corn);
+                    } else if (activeType == 4) {
+                        list.push(item.charm);
+                    }
+                    console.log(item)
+                    result += config.format(item, tempItem.name) + '\n';
+                });
+            }
+
+
+            // 如果没有找到用户，抛出错误
+            if (!userFound) {
+                throw new Error('未找到该微信ID的用户数据或数据未达到最低阈值');
+            }
+            console.log(list)
+            // 汇总list中的值
+            if (list.length > 0) {
+                const sum = list.reduce((a, b) => a + b, 0);
+                if (activeType  == 3 || activeType == 4 ){
+                    result += `总数：${formatChineseNumber(sum)} \n`;
+                }else {
+                    result += `总数：${sum} \n`;
+                }
+                if (activeType == 2 ){
+                    result += `最终金额：${(sum / 8888).toFixed(0) * 33.44 } 元`;
+                }
+            }
+            // 更新 UI 显示结果
+            resultElement.textContent = result;
+            copyButton.style.display = 'block';
+        } catch (error) {
+            console.error('错误:', error);
+            errorElement.textContent = `错误: ${error.message}`;
+            resultElement.textContent = '查询失败，请重试';
+        }
+    });
+
+    // 复制结果到剪贴板
+    function copyToClipboard() {
+        const resultDiv = document.getElementById('result');
+        const text = resultDiv.textContent;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('已复制到剪贴板！');
+            }).catch(err => {
+                console.error('Clipboard API 复制失败：', err);
+                fallbackCopyToClipboard(text);
+            });
+        } else {
+            fallbackCopyToClipboard(text);
+        }
+    }
+
+    // 备用复制方法，用于不支持 Clipboard API 的浏览器
+    function fallbackCopyToClipboard(text) {
+        const copyArea = document.getElementById('copyArea');
+        copyArea.value = text;
+        copyArea.select();
+        try {
+            const successful = document.execCommand('copy');
+            alert(successful ? '已复制到剪贴板！' : '复制失败，请手动复制！');
+        } catch (err) {
+            console.error('备用复制方案失败：', err);
+            alert('复制失败，请手动复制！');
+        }
+    }
+</script>
+</body>
+</html>

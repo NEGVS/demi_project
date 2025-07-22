@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.demo.code.mapper.DemoCategoriesMapper">
+
+
+    <!--分页查询商品分类-->
+    <select id="page" resultType="com.project.demo.code.domain.DemoCategories">
+        SELECT * FROM demo_categories
+        <where>
+            <if test="command.categoryId != null">
+                AND category_id = #{command.categoryId}
+            </if>
+            <if test="command.categoryName != null and command.categoryName != '' ">
+                AND category_name = #{command.categoryName}
+            </if>
+            <if test="command.parentCategoryId != null">
+                AND parent_category_id = #{command.parentCategoryId}
+            </if>
+        </where>
+    </select>
+
+    <!--逻辑删除-->
+    <update id="deleted">
+        UPDATE demo_categories
+        SET deleted = 1,
+            update_date = now(),
+            update_by = #{updateBy}
+        WHERE category_id = #{command.categoryId}
+    </update>
+</mapper>

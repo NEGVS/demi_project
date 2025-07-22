@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.demo.code.mapper.DemoRoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.project.demo.code.domain.DemoRole">
+        <id column="role_id" property="roleId"/> <!-- 主键映射 -->
+        <result column="role_name" property="roleName"/>
+        <result column="role_key" property="roleKey"/>
+        <result column="role_sort" property="roleSort"/>
+        <result column="status" property="status"/>
+        <result column="deleted" property="deleted"/>
+        <result column="version" property="version"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+    <!--角色查询列，去除创建人，创建时间，更新人，更新时间-->
+    <sql id="Base_Column_List">
+        role_id, role_name, role_key, role_sort, status,
+        deleted, version
+    </sql>
+    <!--分页查询-->
+    <select id="page" resultType="com.project.demo.code.domain.DemoRole">
+        select
+        <include refid="Base_Column_List"/>
+        from demo_role
+        where deleted = 1
+    </select>
+    <!--查询角色详情（根据角色ID）-->
+    <select id="findRoleByRoleId" resultType="com.project.demo.code.domain.DemoRole">
+        select
+        <include refid="Base_Column_List"/>
+        from demo_role
+        where role_id = #{roleId}
+        and deleted = 1
+    </select>
+    <!--插入角色-菜单关系表-->
+    <insert id="insertRoleMenu">
+        insert into demo_role_menu(role_id, menu_id)
+        values
+        <foreach collection="menuIdList" item="item" separator=",">
+            (#{roleId},#{item})
+        </foreach>
+    </insert>
+    <!--移除角色-菜单关系表-->
+    <delete id="removeMenuByRoleId">
+        delete from demo_role_menu
+        where role_id = #{roleId}
+        and menu_id in
+        <foreach collection="menuIdList" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+</mapper>

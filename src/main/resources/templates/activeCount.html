@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>统计发言</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f0f2f5 100%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 90%;
+            text-align: center;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .input-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        select, input {
+            padding: 0.75rem;
+            font-size: 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            width: 10rem;
+            background-color: #f9fafb;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="gray" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1rem;
+        }
+        input::-webkit-inner-spin-button,
+        input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input {
+            -moz-appearance: textfield;
+        }
+        button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            background-color: #34d399;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        button:hover {
+            background-color: #2cc0a0;
+        }
+        #copyButton {
+            background-color: #3b82f6;
+        }
+        #copyButton:hover {
+            background-color: #2563eb;
+        }
+        #result {
+            background-color: #f9fafb;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: left;
+            white-space: pre-wrap;
+            font-size: 1rem;
+            line-height: 1.5;
+            max-height: 60vh;
+            overflow-y: auto;
+            border: 1px solid #e5e7eb;
+            margin-top: 1rem;
+            -webkit-overflow-scrolling: touch;
+        }
+        .error {
+            color: #ef4444;
+            font-size: 0.9rem;
+            margin-top: 0.75rem;
+        }
+        #copyArea {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+                max-width: 95%;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            select, input {
+                width: 8rem;
+                font-size: 0.9rem;
+                padding: 0.6rem;
+            }
+            button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            #result {
+                font-size: 0.9rem;
+                max-height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>发言统计</h1>
+    <div class="input-group">
+        <input type="text" id="userWxId" placeholder="请输入微信ID">
+        <select id="type">
+            <option value="1" selected>日活跃</option>
+            <option value="2">月活跃</option>
+        </select>
+        <button onclick="fetchData()">查询</button>
+    </div>
+    <div id="result"></div>
+    <button id="copyButton" onclick="copyToClipboard()" style="display: none;">一键复制</button>
+    <div id="error" class="error"></div>
+</div>
+<textarea id="copyArea"></textarea>
+
+<script>
+    async function fetchData() {
+        const userWxId = document.getElementById('userWxId').value;
+        const type = document.getElementById('type').value;
+        const resultDiv = document.getElementById('result');
+        const errorDiv = document.getElementById('error');
+        const copyButton = document.getElementById('copyButton');
+
+        errorDiv.textContent = '';
+        resultDiv.textContent = '加载中...';
+        copyButton.style.display = 'none';
+
+        if (!userWxId) {
+            errorDiv.textContent = '请输入 userWxId';
+            resultDiv.textContent = '';
+            return;
+        }
+
+        try {
+            // 更新请求地址，添加 days 参数
+            const url = `http://1.92.111.247:7860/wxRobot/activeCount?userWxId=${userWxId}&type=${type}`;
+            // const url = `http://127.0.0.1:7860/wxRobot/activeCount?userWxId=${userWxId}&type=${type}`;
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('网络请求失败');
+            }
+
+            const text = await response.text();
+            if (text === '暂无数据') {
+                resultDiv.textContent = '暂无数据';
+                return;
+            }
+
+            const jsonResponse = JSON.parse(text);
+            if (jsonResponse.code !== 200) {
+                throw new Error(jsonResponse.message || '操作失败');
+            }
+
+            const data = jsonResponse.data;
+            if (!Array.isArray(data) || data.length === 0) {
+                resultDiv.textContent = '暂无数据';
+                return;
+            }
+
+            const formattedText = data.join('\n');
+            resultDiv.textContent = formattedText;
+            copyButton.style.display = 'block';
+        } catch (error) {
+            errorDiv.textContent = '请求失败：' + error.message;
+            resultDiv.textContent = '';
+        }
+    }
+
+    function copyToClipboard() {
+        const resultDiv = document.getElementById('result');
+        const text = resultDiv.textContent;
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('已复制到剪贴板！');
+            }).catch(err => {
+                console.error('Clipboard API 复制失败：', err);
+                fallbackCopyToClipboard(text);
+            });
+        } else {
+            fallbackCopyToClipboard(text);
+        }
+    }
+
+    function fallbackCopyToClipboard(text) {
+        const copyArea = document.getElementById('copyArea');
+        copyArea.value = text;
+        copyArea.select();
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                alert('已复制到剪贴板！');
+            } else {
+                alert('复制失败，请手动复制！');
+            }
+        } catch (err) {
+            console.error('备用复制方案失败：', err);
+            alert('复制失败，请手动复制！');
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.demo.code.mapper.DemoMenuMapper">
+    <!-- resultMap 映射 -->
+    <resultMap id="BaseResultMap" type="com.project.demo.code.domain.DemoMenu">
+        <id column="menu_id" property="menuId"/> <!-- 主键映射 -->
+        <result column="menu_name" property="menuName"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="order_num" property="orderNum"/>
+        <result column="path" property="path"/>
+        <result column="component" property="component"/>
+        <result column="query" property="query"/>
+        <result column="route_name" property="routeName"/>
+        <result column="is_frame" property="isFrame"/>
+        <result column="is_cache" property="isCache"/>
+        <result column="menu_type" property="menuType"/>
+        <result column="visible" property="visible"/>
+        <result column="status" property="status"/>
+        <result column="perms" property="perms"/>
+        <result column="icon" property="icon"/>
+        <result column="deleted" property="deleted"/>
+        <result column="version" property="version"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_date" property="createDate"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_date" property="updateDate"/>
+    </resultMap>
+    <!--菜单查询列，去除创建人，创建时间，更新人，更新时间-->
+    <sql id="Base_Column_List">
+               menu_id,
+               menu_name,
+               parent_id,
+               order_num,
+               `path`,
+               component,
+               query,
+               route_name,
+               is_frame,
+               is_cache,
+               menu_type,
+               visible,
+               status,
+               perms,
+               icon,
+               version
+    </sql>
+    <!--分页查询-->
+    <select id="page" resultType="com.project.demo.code.domain.DemoMenu">
+        select
+        <include refid="Base_Column_List"/>
+        from demo_menu
+        where status = 0
+    </select>
+    <!--查询菜单详情（根据菜单ID）-->
+    <select id="findMenuByMenuId" resultType="com.project.demo.code.domain.DemoMenu">
+        select
+        <include refid="Base_Column_List"/>
+        from demo_menu
+        where menu_id = #{menuId}
+        and deleted = 1
+    </select>
+    <!--根据当前用户信息获取菜单信息-->
+    <select id="getMenuByLoinUser" resultType="com.project.demo.code.domain.DemoMenu">
+        select m.menu_id,m.menu_name,m.parent_id,m.path,m.route_name,m.perms,m.icon,m.menu_type
+        from demo_menu m
+                 left join demo_role_menu rm on m.menu_id = rm.menu_id
+                 left join demo_role r on r.role_id = rm.role_id and r.deleted = 1 and r.status = 1
+                 left join demo_user_role ur on ur.role_id = r.role_id
+        where ur.user_id = #{userId}
+        group by m.menu_id,m.menu_name,m.parent_id,m.path,m.perms,m.icon,m.menu_type
+    </select>
+
+    <!--根据当前用户信息获取菜单信息-->
+    <select id="getMenuByRoleId" resultType="com.project.demo.code.dto.rolemenu.RoleMenuDTO">
+        select m.menu_id,m.menu_name,m.parent_id,m.path,m.perms,m.icon,m.menu_type
+        from demo_menu m
+                 left join demo_role_menu rm on m.menu_id = rm.menu_id
+                 left join demo_role r on r.role_id = rm.role_id and r.deleted = 1 and r.status = 1
+                 left join demo_user_role ur on ur.role_id = r.role_id
+        where ur.user_id = #{userId}
+        group by m.menu_id,m.menu_name,m.parent_id,m.path,m.perms,m.icon,m.menu_type
+    </select>
+</mapper>

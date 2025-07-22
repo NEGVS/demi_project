@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.demo.code.mapper.DemoChickenSoupMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.project.demo.code.domain.DemoChickenSoup">
+        <id column="id" property="id"/>
+        <result column="content" property="content"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, content
+    </sql>
+
+    <!-- 基础增删改查操作 -->
+    <!-- 插入数据 -->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="com.project.demo.code.domain.DemoChickenSoup">
+        insert into demo_chicken_soup (content)
+        values(
+        #{content}
+        )
+    </insert>
+
+
+    <!-- 根据主键查询 -->
+    <select id="selectById" resultType="com.project.demo.code.domain.DemoChickenSoup">
+        SELECT
+        <include refid="Base_Column_List"/>
+        <!-- 表名称 -->
+        FROM demo_chicken_soup
+        WHERE id = #{id}
+    </select>
+
+    <!-- 查询带查询条件 -->
+    <select id="selectAll" resultType="com.project.demo.code.domain.DemoChickenSoup">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM demo_chicken_soup
+        <where>
+            <if test=" content != null and content != '' ">
+                and content = #{content}
+            </if>
+        </where>
+    </select>
+
+    <!-- 更新 -->
+    <update id="updateById" parameterType="com.project.demo.code.domain.DemoChickenSoup">
+        UPDATE demo_chicken_soup
+        <set>
+            <if test=" content != null and content != '' ">
+                content = #{content}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 删除 -->
+    <delete id="deleteById" parameterType="com.project.demo.code.domain.DemoChickenSoup">
+        DELETE
+        from demo_chicken_soup
+        where id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,58 @@
+server:
+  port: 7860
+# spring-doc 接口文档
+springdoc:
+  api-docs:
+    enabled: true
+  group-configs:
+    - group: '全部'
+      paths-to-match: '/**'
+      packages-to-scan: com.project.demo.code.controller
+    - group: '抓取数据'
+      paths-to-match: '/futures/**'
+      packages-to-scan: com.project.demo.code.controller
+    - group: 'authority'
+      paths-to-match: '/authority/**'
+      packages-to-scan: com.project.demo.code.controller
+    - group: '测试token'
+      paths-to-match: '/jwt/**'
+      packages-to-scan: com.project.demo.code.controller
+    - group: 'demo'
+      paths-to-match: '/demo/**'
+      packages-to-scan: com.project.demo.code.controller
+    - group: 'wxRobot'
+      paths-to-match: '/wxRobot/**'
+      packages-to-scan: com.project.demo.code.controller
+  default-flat-param-object: false
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  # 生产可屏蔽资源（所有controller）
+#  production: true
+  setting:
+    language: zh_cn
+    # 开启动态请求参数，true-开启，false-关闭
+    enable-dynamic-parameter: true
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  global-config:
+    db-config:
+      #全局主键策略，自增
+      id-type: AUTO
+
+jwt:
+  isTest: true
+logging:
+  level:
+    root: info
+# 上传文件大小限制
+spring:
+  web:
+    resources:
+      static-locations: classpath:/static/,file:uploads/
+  servlet:
+    multipart:
+      max-file-size: 256MB
+      max-request-size: 256MB

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>土味情话</title>
+    <style>
+        :root {
+            --primary-color: #ff6b6b;
+            --secondary-color: #4ecdc4;
+            --text-color: #333;
+            --bg-color: #f7f7f7;
+            --container-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            transition: background 0.5s ease;
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+
+        h1 {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #output-container {
+            position: relative;
+            height: 150px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        #output {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: var(--text-color);
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s ease;
+            opacity: 1;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        #output.fade-out {
+            animation: fadeOut 0.5s ease-out forwards;
+        }
+
+        #output.fade-in {
+            animation: fadeIn 0.5s ease-in forwards;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button[disabled] {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        button:hover:not([disabled]) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        #theme-toggle {
+            background-color: var(--secondary-color);
+        }
+
+        #transparency-toggle {
+            background-color: var(--primary-color);
+        }
+
+        .animate-pop {
+            animation: pop 0.3s ease-out;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>土味情话生成器</h1>
+    <div id="output-container">
+        <div id="output"></div>
+    </div>
+    <div>
+        <button id="generate">生成文案</button>
+        <button id="copy">复制文案</button>
+        <button id="theme-toggle">切换主题</button>
+        <button id="transparency-toggle">切换透明度</button>
+    </div>
+</div>
+
+<script>
+    const output = document.getElementById('output');
+    const generateBtn = document.getElementById('generate');
+    const copyBtn = document.getElementById('copy');
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const transparencyToggleBtn = document.getElementById('transparency-toggle');
+    const container = document.querySelector('.container');
+
+    let canClickGenerate = true;
+    let generateTimeout;
+
+    function generateQuote() {
+        if (!canClickGenerate) return;
+        canClickGenerate = false;
+        generateBtn.disabled = true;
+
+        fetch('/paly/random')
+            .then(response => response.json())
+            .then(data => {
+                output.classList.add('fade-out');
+
+                setTimeout(() => {
+                    output.textContent = data.data;
+                    output.classList.remove('fade-out');
+                    output.classList.add('fade-in');
+                }, 500);
+
+                setTimeout(() => {
+                    output.classList.remove('fade-in');
+                    resetGenerateButton();
+                }, 1000);
+            })
+            .catch(error => {
+                console.error('Error fetching quote:', error);
+                output.textContent = '无法获取文案，请稍后重试。';
+                resetGenerateButton();
+            });
+
+        // Allow retry after 5 seconds if response isn't received
+        generateTimeout = setTimeout(() => {
+            resetGenerateButton();
+        }, 5000);
+    }
+
+    function resetGenerateButton() {
+        canClickGenerate = true;
+        generateBtn.disabled = false;
+        clearTimeout(generateTimeout);
+    }
+
+    // function copyQuote() {
+    //     navigator.clipboard.writeText(output.textContent).then(() => {
+    //         copyBtn.textContent = '已复制！';
+    //         copyBtn.classList.add('animate-pop');
+    //         setTimeout(() => {
+    //             copyBtn.textContent = '复制文案';
+    //             copyBtn.classList.remove('animate-pop');
+    //         }, 2000);
+    //     });
+    // }
+    function copyQuote() {
+        const textToCopy = output.innerText || output.textContent;
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showCopyConfirmation();
+            }).catch(err => {
+                fallbackCopyText(textToCopy);
+            });
+        } else {
+            fallbackCopyText(textToCopy);
+        }
+    }
+
+    function fallbackCopyText(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";  // Avoid scrolling to bottom
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showCopyConfirmation();
+        } catch (err) {
+            console.error('Fallback: Unable to copy', err);
+        }
+        document.body.removeChild(textArea);
+    }
+
+    function showCopyConfirmation() {
+        copyBtn.textContent = '已复制！';
+        copyBtn.classList.add('animate-pop');
+        setTimeout(() => {
+            copyBtn.textContent = '复制文案';
+            copyBtn.classList.remove('animate-pop');
+        }, 2000);
+    }
+
+    function toggleTheme() {
+        const root = document.documentElement;
+        const currentPrimary = getComputedStyle(root).getPropertyValue('--primary-color').trim();
+        if (currentPrimary === '#ff6b6b') {
+            // 切换到深色主题
+            root.style.setProperty('--primary-color', '#6b66ff');
+            root.style.setProperty('--secondary-color', '#66ffd9');
+            root.style.setProperty('--text-color', '#ffffff');
+            root.style.setProperty('--bg-color', 'rgba(0, 0, 0, 0.9)');
+            root.style.setProperty('--container-bg', 'rgba(0, 0, 0, 0.9)');
+        } else {
+            // 切换到浅色主题
+            root.style.setProperty('--primary-color', '#ff6b6b');
+            root.style.setProperty('--secondary-color', '#4ecdc4');
+            root.style.setProperty('--text-color', '#333333');
+            root.style.setProperty('--bg-color', '#f7f7f7');
+            root.style.setProperty('--container-bg', 'rgba(255, 255, 255, 0.9)');
+        }
+        updateDynamicBackground();
+    }
+
+    function toggleTransparency() {
+        const currentBg = getComputedStyle(container).getPropertyValue('background-color');
+        if (currentBg === 'rgba(0, 0, 0, 0)' || currentBg === 'transparent') {
+            container.style.backgroundColor = 'var(--container-bg)';
+        } else {
+            container.style.backgroundColor = 'transparent';
+        }
+    }
+
+    function updateDynamicBackground() {
+        const root = document.documentElement;
+        const primary = getComputedStyle(root).getPropertyValue('--primary-color').trim();
+        const secondary = getComputedStyle(root).getPropertyValue('--secondary-color').trim();
+        document.body.style.background = `linear-gradient(-45deg, ${primary}, ${secondary}, ${primary}, ${secondary})`;
+        document.body.style.backgroundSize = '400% 400%';
+        document.body.style.animation = 'gradientAnimation 15s ease infinite';
+    }
+
+    generateBtn.addEventListener('click', generateQuote);
+    copyBtn.addEventListener('click', copyQuote);
+    themeToggleBtn.addEventListener('click', toggleTheme);
+    transparencyToggleBtn.addEventListener('click', toggleTransparency);
+
+    // 初始生成一条文案
+    generateQuote();
+    // 初始化动态背景
+    updateDynamicBackground();
+</script>
+</body>
+</html>

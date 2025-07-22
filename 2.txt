@@ -1,0 +1,1504 @@
+{
+    "topic": {
+        "topicItems": [
+            {
+                "childList": [
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "联系实际谈谈你是如何认识全面从严治党的重大意义？",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "referenceAnswerAttachments": [],
+                        "subjectiveAnswer": "0",
+                        "itemScore": 20,
+                        "questionTypeName": "主观题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "subjective",
+                        "id": "2c9080d596b79bb10196b851d5fb2475",
+                        "referenceAnswer": "第一，全面从严治党是新形势下推进伟大事业、进行伟大斗争、实现伟大梦想的必然要求。第二，全面从严治党是把党锻造成为坚强有力的马克思主义执政党的迫切需要。第三，全面从严治党是决定党兴衰成败的关键因素。第四，党要始终成为时代先锋、民族脊梁，实现长期执政，必须全面从严治党，永葆旺盛生命力和强大战斗力。"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "简述推进中国式现代化需要把握的重大原则。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "referenceAnswerAttachments": [],
+                        "subjectiveAnswer": "0",
+                        "itemScore": 10,
+                        "questionTypeName": "主观题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "subjective",
+                        "id": "2c9080d596b79bb10196b851d5fc2476",
+                        "referenceAnswer": "以中国式现代化全面推进中华民族伟大复兴是一次新的长征，前途光明，任重道远。前进道路上，必须牢牢把握以下重大原则。\n一是，坚持和加强党的全面领导；\n二是，坚持中国特色社会主义道路；\n三是，坚持以人民为中心的发展思想；\n四是，坚持深化改革开放；\n五是，坚持发扬斗争精神。"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "简述中国特色社会主义进入新时代的科学内涵。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "referenceAnswerAttachments": [],
+                        "subjectiveAnswer": "0",
+                        "itemScore": 10,
+                        "questionTypeName": "主观题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "subjective",
+                        "id": "2c9080d596b79bb10196b851d5fc2477",
+                        "referenceAnswer": "第一，是承前启后、继往开来，在新的历史条件下继续夺取中国特色社会主义伟大胜利的时代。\n第二.是决胜全面建成小康社会、进而全面建设社会主义现代化强国的时代。\n第三.是全国各族人民团结奋斗、不断创造美好生活、逐步实现全体人民共同富裕的时代.\n第四.全体中华儿女勠力同心、奋力实现中华民族伟大复兴中国梦的时代。第五，是我国不断为人类作出更大贡献的时代。"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "简述习近平新时代中国特色社会主义思想创立的时代背景。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "referenceAnswerAttachments": [],
+                        "subjectiveAnswer": "0",
+                        "itemScore": 10,
+                        "questionTypeName": "主观题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "subjective",
+                        "id": "2c9080d596b79bb10196b851d5fd2478",
+                        "referenceAnswer": "第一，世界百年未有之大变局加速演进。第二，中华民族伟大复兴进入关键时期。第三，中国式现代化全面推进拓展。第四，科学社会主义在21世纪的中国焕发新的蓬勃生机。第五，中国共产党自我革命开辟新的境界。"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "民生问题是分配问题，不需要依靠发展来解决。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "正确",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "错误",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "判断题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "judgment",
+                        "id": "2c9080d596b79bb10196b851d5fd2479"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "意识形态工作是为国家立心、为民族立魂的工作。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": true,
+                        "studentItemScore": 1,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "正确",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "错误",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "判断题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "judgment",
+                        "id": "2c9080d596b79bb10196b851d5fe247a"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "一个国家民主不民主，关键在于是否拥有选举程序。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "正确",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "错误",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "判断题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "judgment",
+                        "id": "2c9080d596b79bb10196b851d5fe247b"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "创新驱动发展战略，就是坚持科技是第一动力。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "正确",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "错误",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "判断题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "judgment",
+                        "id": "2c9080d596b79bb10196b851d5fe247c"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "我国将立足新发展阶段，贯穿新发展理念，积极构建以国际大循环为主体、国内国际双循环相互促进的新发展格局。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "正确",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "错误",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "判断题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "judgment",
+                        "id": "2c9080d596b79bb10196b851d5ff247d"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "江山就是人民、人民就是江山，这是由人民群众在党和国家中的地位决定的。",
+                        "questionDiffCode": "3",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "正确",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "错误",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "判断题",
+                        "questionDiffName": "难",
+                        "questionTypeCode": "judgment",
+                        "id": "2c9080d596b79bb10196b851d5ff247e"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "维护党中央权威和集中统一领导，同坚持党的民主集中制矛盾的。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "正确",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "错误",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "判断题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "judgment",
+                        "id": "2c9080d596b79bb10196b851d600247f"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "中国式现代化是强国建设、民族复兴的唯一正确道路。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": true,
+                        "studentItemScore": 1,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "正确",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "错误",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "判断题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "judgment",
+                        "id": "2c9080d596b79bb10196b851d6002480"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "新时代我国社会主要矛盾的变化改变了对我国社会主义所处历史阶段的判断。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "正确",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "错误",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "判断题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "judgment",
+                        "id": "2c9080d596b79bb10196b851d6002481"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "习近平新时代中国特色社会主义思想就是习近平的思想。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "正确",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "错误",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "判断题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "judgment",
+                        "id": "2c9080d596b79bb10196b851d6012482"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "持以人民为中心的发展思想，在高质量发展中促进共同富裕，正确处理效率和公平的关系，基础性制度安排必须协调配套地构建（ ）。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "初次分配",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "多次分配",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "再分配",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "第三次分配",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 2,
+                        "questionTypeName": "多选题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "multiple",
+                        "id": "2c9080d596b79bb10196b851d6012483"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "100多年前，中国共产党的先驱们创建了中国共产党, 形成的伟大建党精神是（   ）。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "坚持真理、坚守理想",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "践行初心、担当使命",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "不怕牺牲、英勇斗争",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "对党忠诚、不负人民",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 2,
+                        "questionTypeName": "多选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "multiple",
+                        "id": "2c9080d596b79bb10196b851d6022484"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "全面依法治国必须统筹处理哪些关系（ ）。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "政治和法治",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "改革和法治",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "依法治国和以德治国",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "依法治国和依规治党",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 2,
+                        "questionTypeName": "多选题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "multiple",
+                        "id": "2c9080d596b79bb10196b851d6022485"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "我国全过程人民民主实现了（    ）相统一，是全链条、全方位、全覆盖的民主，是最广泛、最真实、最管用的社会主义民主。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "过程民主和成果民主",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "直接民主和间接民主",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "程序民主和实质民主",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "人民民主和国家意志",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 2,
+                        "questionTypeName": "多选题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "multiple",
+                        "id": "2c9080d596b79bb10196b851d6022486"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "全面建设社会主义现代化国家的基础性、战略性支撑是（    ）。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "教育",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "科技",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "人才",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "军事",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 2,
+                        "questionTypeName": "多选题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "multiple",
+                        "id": "2c9080d596b79bb10196b851d6032487"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "高质量发展的重大战略意义是（    ）。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "高质量发展为全面建设社会主义现代化国家提供更为坚实的物质基础",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "高质量发展是不断满足人民对美好生活需要的重要保证",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "高质量发展是维护国家长治久安的必然要求",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "高质量发展是社会和谐稳定发展的重要前提",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 2,
+                        "questionTypeName": "多选题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "multiple",
+                        "id": "2c9080d596b79bb10196b851d6032488"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "我国社会主义现代化建设的三个重要支点是（     ）。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "改革",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "稳定",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "创新",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "发展",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 2,
+                        "questionTypeName": "多选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "multiple",
+                        "id": "2c9080d596b79bb10196b851d6042489"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "实现中华民族伟大复兴的中国梦，本质是（    ）。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "国家富强",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "生活富裕",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "民族振兴",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "人民幸福",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 2,
+                        "questionTypeName": "多选题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "multiple",
+                        "id": "2c9080d596b79bb10196b851d604248a"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "党的十八大以来，以习近平为主要代表的中国共产党人，作出新时代中国特色社会主义发展的战略安排，统揽（   ），开创了中国特色社会主义新时代。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "伟大斗争",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "伟大工程",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "伟大事业",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "伟大梦想",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 2,
+                        "questionTypeName": "多选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "multiple",
+                        "id": "2c9080d596b79bb10196b851d604248b"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "关于习近平新时代中国特色社会主义思想的历史地位表述正确的有（    ）。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "是当代中国马克思主义、二十一世纪马克思主义",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "是中华文化和中国精神的时代精华",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "实现了马克思主义中国化时代化新的飞跃",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "是全党全国各族人民为实现中华民族伟大复兴而奋斗的行动指南，是新时代党和国家事业发展的根本遵循",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 2,
+                        "questionTypeName": "多选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "multiple",
+                        "id": "2c9080d596b79bb10196b851d605248c"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "新时代党的建设的鲜明主题是（    ）。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": true,
+                        "studentItemScore": 1,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "全面从严治党",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "推动伟大社会革命",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "政治建设",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "进行伟大斗争",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d605248d"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "构建（    ）是世界各国人民前途所在。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "新型国际文明",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "人类命运共同体",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "新型国际秩序",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "新型国际关系",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d606248e"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "维护和用好（ ）是\"一国两制\"方针全面准确贯彻落实的根本保障。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "宪法和基本法",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "中央全面管治权",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "高度自治权",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "\"港人治港\"\"澳人治澳\"方针\n政策",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d606248f"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "人民军队的立军之本是（   ）。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "人才强军",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "科技强军",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "依法治军",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "政治建军",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d6072490"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "我们必须要认识到，关乎国家发展稳定和社会长治久安的重大战略问题是（   ）。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "国家稳定",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "国家安全",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "国际稳定",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "国际安全",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d6072491"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "习近平总书记指出，把生态优势转化成为经济优势，就必须要坚持（    ）。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "科学治理",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "生态优先",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "经济发展",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "和谐共生",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d6072492"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "社会主义生产的根本目的是（ ）。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "促进经济增长",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "维护社会稳定",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "增进民生福祉",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "实现高质量发展",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d6082493"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "一个国家、一个民族发展中最基本、最深沉、最持久的力量是（   ）。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": true,
+                        "studentItemScore": 1,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "文化自信",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "道路自信",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "理论自信",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "制度自信",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d6082494"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "中国特色社会主义的本质要求和重要保障是（ ）。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "全面建设社会主义现代化国家",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "全面依法治国",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "全面深化改革",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "全面从严治党",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d6092495"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "（   ）是社会主义民主政治的本质属性，是最广泛、最真实、最管用的民主。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "民主集中制",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "中国共产党领导",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "全过程人民民主",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "人民当家作主",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d6092496"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "全面建设社会主义现代化国家，必须坚持(   )是第一生产力。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "人才",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "资源",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "科技",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "环境",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d60a2497"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "实现高质量发展的指导原则是（   ）。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "新发展阶段",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "新发展方位",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "新发展理念",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "供给侧改革",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d60a2498"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "改革发展的前提是（    ）。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "创新",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "改革",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "发展",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "稳定",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d60b2499"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "中国共产党的根本政治立场，也是我们党区别于其他政党的显著标志是（    ）。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "深化改革",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "人民立场",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "促进高质量发展",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "实事求是",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d60b249a"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "中国最大的国情是（    ）。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "处于并将长期处于社会主义初级阶段",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "世界上最大的发展中国家",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "中国特色社会主义进入新时代",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "中国共产党的领导",
+                                "isAnswer": true
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d60b249b"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "我国国家制度和国家治理体系具有多方面的显著优势，其中最大优势是 （    ）。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "民主集中制",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "中国共产党的领导",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "群众路线",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "实事求是",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d60c249c"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "一百年来，中国共产党团结带领中国人民进行的一切奋斗、一切牺牲、一切创造，归结起来就是一个主题（    ）。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "建立新中国",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "追求共同富裕",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "实现中华民族伟大复兴",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "实现人民对美好生活的向往",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d60c249d"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "在“四个全面”中居于引领地位的是（    ）。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "全面深化改革",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "全面建设社会主义现代化国家",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "全面依法治国",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "全面从严治党",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d60d249e"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "习近平新时代中国特色社会主义思想是“两个结合”的重大成果，即马克思主义基本原理同中国具体实际相结合、（    ）。",
+                        "questionDiffCode": "2",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "同民族特色、民族形式相结合",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "同中华优秀传统文化相结合",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "同历史文化相结合",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "同时代特征相结合",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "中",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d60d249f"
+                    },
+                    {
+                        "questionTitleAttachments": [],
+                        "attachments": [],
+                        "questionTitle": "当前，我国处于近代以来最好的发展时期，“两个大局”同步交织、相互激荡。“两个大局”指的是：一个是世界百年未有之大变局，一个是（    ）。",
+                        "questionDiffCode": "1",
+                        "isAnswerCorrect": false,
+                        "studentItemScore": 0,
+                        "commentsAttachments": [],
+                        "optionList": [
+                            {
+                                "attachments": [],
+                                "content": "社会主义现代化强国建设的全局",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "中华民族伟大复兴的战略全局",
+                                "isAnswer": true
+                            },
+                            {
+                                "attachments": [],
+                                "content": "人类命运共同体之大局",
+                                "isAnswer": false
+                            },
+                            {
+                                "attachments": [],
+                                "content": "“四个全面”战略布局",
+                                "isAnswer": false
+                            }
+                        ],
+                        "objectiveAnswer": "0",
+                        "itemScore": 1,
+                        "questionTypeName": "单选题",
+                        "questionDiffName": "易",
+                        "questionTypeCode": "single",
+                        "id": "2c9080d596b79bb10196b851d60d24a0"
+                    }
+                ],
+                "id": "2c9080d596b79bb10196b851d5fb2474",
+                "title": "期末大作业（仅一次提交机会）"
+            }
+        ],
+        "hasContinue": false,
+        "endDate": 1747583999000,
+        "topicSettingRules": {
+            "openRedo": false,
+            "limitStudent": true,
+            "gradeShowAnswer": true,
+            "randomOptionSequence": false,
+            "showAnswerUseScore": false,
+            "randomQuestionSequence": false,
+            "answerShowType": "3",
+            "showAnswerUseRedo": false,
+            "gradeShowScore": true
+        },
+        "title": "期末大作业（仅一次提交机会）",
+        "canRedo": true,
+        "topicType": "normal",
+        "studentTopic": {
+            "topicScore": 4,
+            "id": "2c9080d596b79bb10196b851d75424ca",
+            "state": "03"
+        },
+        "highScore": 0,
+        "rejectContent": "学生未作答",
+        "studentStoreTopicId": "2c9080d596b79bb10196b851d5fb2473",
+        "topicScore": 4,
+        "state": "03",
+        "chapterTitle": "期末大作业（仅一次提交机会）",
+        "redoNum": 0,
+        "startDate": 1742227200000
+    },
+    "errorCode": 0,
+    "internationalMessage": {
+        "arMessage": "نجح الطلب",
+        "ruMessage": "Запрос успешно отправлен",
+        "zhMessage": "请求成功",
+        "esMessage": "Solicitud exitosa",
+        "koMessage": "요청 성공",
+        "frMessage": "Demande réussie",
+        "enMessage": "Request success",
+        "jaMessage": "リクエスト成功",
+        "ptMessage": "Solicitação bem-sucedida"
+    },
+    "message": "请求成功",
+    "responseCode": "SUCCESS",
+    "timestamp": "2025-05-12T14:12:15.015+0800"
+}

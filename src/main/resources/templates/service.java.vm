@@ -1,0 +1,44 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${superServiceClassPackage};
+
+/**
+ * <p>
+ * $!{table.comment} 服务类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+#if(${kotlin})
+interface ${table.serviceName} : ${superServiceClass}<${entity}>
+#else
+public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+
+        /**
+         * 根据ID查询
+         */
+        ${entity} getById(Integer id);
+        /**
+         * 查询所有字段（支持动态条件）
+         */
+        // 查询所有，支持动态条件
+        List<${entity}> queryAll(${entity} vo);
+        /**
+         * 根据ID更新数据
+         */
+        Integer update(${entity} vo);
+
+        /**
+         * 根据ID删除数据（物理删除）
+         */
+        Integer deleteById(Integer id);
+
+        /**
+         * 新增数据
+         */
+        Integer insert(${entity} vo);
+
+}
+#end

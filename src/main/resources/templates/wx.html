@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>再见！🏆·我白的呆呆</title>
+    <meta name="description" content="特别纪念页面 - 我白的呆呆">
+    <!-- 微信分享元数据 -->
+    <meta property="og:title" content="再见！🏆·我白的呆呆" />
+    <meta property="og:description" content="点击查看完整内容，见证特别时刻" />
+    <meta property="og:image" content="https://yourdomain.com/static/vx_thumbnail.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourdomain.com/share-page" />
+    <!-- 微信JS-SDK -->
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+</head>
+<body>
+<script>
+    // 配置微信分享
+    async function initWechatShare() {
+        try {
+            // 获取当前页面URL（去除hash部分）
+            const currentUrl = window.location.href.split('#')[0];
+
+            // 从后端获取签名
+            const response = await fetch(`/api/wechat/signature?url=${encodeURIComponent(currentUrl)}`);
+            const { appId, timestamp, nonceStr, signature } = await response.json();
+
+            // 初始化配置
+            wx.config({
+                debug: false, // 生产环境关闭调试
+                appId,
+                timestamp,
+                nonceStr,
+                signature,
+                jsApiList: [
+                    'updateAppMessageShareData',
+                    'updateTimelineShareData',
+                    'onMenuShareAppMessage',
+                    'onMenuShareTimeline'
+                ]
+            });
+
+            // 就绪回调
+            wx.ready(() => {
+                // 朋友分享配置
+                wx.updateAppMessageShareData({
+                    title: '特别纪念 🏆', // 分享标题
+                    desc: '点击查看完整故事 →', // 分享描述
+                    link: 'https://yourdomain.com/share-page', // 分享链接
+                    imgUrl: 'https://yourdomain.com/static/vx_thumbnail.jpg', // 缩略图
+                    success: () => console.log('AppMessage 分享配置成功'),
+                });
+
+                // 朋友圈分享配置
+                wx.updateTimelineShareData({
+                    title: '【特别纪念】我白的呆呆', // 朋友圈默认读取标题
+                    link: 'https://yourdomain.com/share-page',
+                    imgUrl: 'https://yourdomain.com/static/vx_thumbnail.jpg',
+                    success: () => console.log('Timeline 分享配置成功'),
+                });
+            });
+
+            // 错误处理
+            wx.error(err => {
+                console.error('微信SDK错误:', err);
+                alert('分享功能初始化失败，请刷新重试');
+            });
+
+        } catch (error) {
+            console.error('初始化失败:', error);
+            alert('网络请求异常，请检查连接');
+        }
+    }
+
+    // 页面加载后执行
+    window.addEventListener('load', initWechatShare);
+</script>
+</body>
+</html>

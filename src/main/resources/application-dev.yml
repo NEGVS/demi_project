@@ -1,0 +1,23 @@
+server:
+  port: 8081
+# spring-doc 接口文档
+springdoc:
+  api-docs:
+    enabled: true
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.project.demo.controller
+  default-flat-param-object: true
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl # 只会打印sql和参数
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 会输出查询结果
+
+jwt:
+  isTest: true

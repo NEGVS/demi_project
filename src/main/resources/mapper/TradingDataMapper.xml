@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.demo.code.mapper.TradingDataMapper">
+
+    <!--分页查询-->
+    <select id="page" resultType="com.project.demo.code.domain.TradingData">
+        select * from trading_data
+        <where>
+            <if test="command.type != null and command.type != ''">
+                and type = #{command.type}
+            </if>
+            <if test="command.seat != null and command.seat != ''">
+                and seat = #{command.seat}
+            </if>
+            <if test="command.commodity != null and command.commodity != ''">
+                and commodity = #{command.commodity}
+            </if>
+            <if test="command.date != null and command.date != ''">
+                and date = #{command.date}
+            </if>
+        </where>
+    </select>
+    <insert id="insertList">
+        insert into trading_data (type, seat, long_position, change_num, net_long_short, commodity, date)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.type}, #{item.seat}, #{item.longPosition}, #{item.changeNum}, #{item.netLongShort},
+            #{item.commodity}, #{item.date})
+        </foreach>
+    </insert>
+</mapper>

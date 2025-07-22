@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.demo.code.mapper.DemoMerchantSchedulesMapper">
+
+
+    <!--根据商家ID获取商家营业配置信息-->
+    <select id="selectListByMerchantId" resultType="com.project.demo.code.dto.demo.MerchantSchedulesDTO">
+        select schedule_id,
+               merchant_id,
+               day_of_week,
+               is_holiday,
+               open_time,
+               close_time
+        from demo_merchant_schedules
+        where merchant_id = #{merchantId}
+          and deleted = 1
+    </select>
+    <!--批量新增商家营业配置信息-->
+    <insert id="insertBatch" keyProperty="scheduleId" useGeneratedKeys="true">
+        insert into demo_merchant_schedules
+        ( merchant_id, day_of_week, is_holiday, open_time, close_time , create_by ,
+        create_date , update_by , update_date)
+        values
+        <foreach collection="merchantSchedules" item="item" separator=",">
+            (#{item.merchantId}, #{item.dayOfWeek}, #{item.isHoliday}, #{item.openTime},
+            #{item.closeTime}, #{item.createBy} , #{item.createDate} , #{item.updateBy} , #{item.updateDate} )
+        </foreach>
+    </insert>
+    <!--批量更新商家营业配置信息-->
+    <update id="updateBatch">
+        <foreach collection="merchantSchedules" item="item" separator=";">
+            update demo_merchant_schedules
+            set
+            day_of_week = #{item.dayOfWeek},
+            is_holiday = #{item.isHoliday},
+            open_time = #{item.openTime},
+            close_time = #{item.closeTime},
+            update_by = #{item.updateBy} ,
+            update_date = now()
+            where schedule_id = #{item.scheduleId} and deleted = 1 and merchant_id = #{item.merchantId}
+        </foreach>
+    </update>
+</mapper>

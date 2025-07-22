@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.demo.code.mapper.DemoCartItemsMapper">
+
+    <!--根据购物车元数据ID和商品ID查询当前商品是否已存在购物车中-->
+    <select id="selectByCartMetaIdAndProductId" resultType="com.project.demo.code.domain.DemoCartItems">
+        select cart_item_id,
+               cart_id,
+               product_id,
+               merchant_id,
+               quantity,
+               total_price,
+               unit_price,
+               version
+        from demo_cart_items
+        where cart_id = #{cartId}
+          and product_id = #{productId}
+          and deleted = 1
+    </select>
+
+    <!--查询购物车明细-->
+    <select id="queryCartItem" resultType="com.project.demo.code.dto.demo.CartItemDTO">
+        select a.cart_item_id,
+               a.cart_id,
+               a.product_id,
+               a.quantity,
+               a.total_price,
+               a.unit_price,
+               a.version,
+               b.product_name,
+               b.product_image
+        from demo_cart_items a
+        left join demo_products b on a.product_id = b.product_id
+        where a.user_id = #{userId}
+          and a.merchant_id = #{merchantId}
+          and a.deleted = 1
+    </select>
+
+    <!--根据购物车明细ID更新购物车明细信息-->
+    <update id="updateByCartItemId">
+        update demo_cart_items
+        set quantity    = #{cartItem.quantity},
+            total_price = #{cartItem.totalPrice},
+            version     = version + 1
+        where cart_item_id = #{cartItem.cartItemId}
+          and deleted = 1
+          and version = #{cartItem.version}
+    </update>
+
+    <!--清空购物车根据商户-->
+    <update id="clearCartByMerchantId">
+        delete demo_cart_items from demo_cart_items
+        where user_id = #{userId}
+          and merchant_id = #{merchantId}
+    </update>
+
+    <!--清空购物车根据商品-->
+    <update id="clearCartByProductId">
+        delete demo_cart_items
+        from demo_cart_items
+        where user_id = #{userId}
+          and product_id = #{productId}
+    </update>
+</mapper>

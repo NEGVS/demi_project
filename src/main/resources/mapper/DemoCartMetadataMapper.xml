@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.demo.code.mapper.DemoCartMetadataMapper">
+    <!--根据用户id + 商家id查询购物车元信息-->
+    <select id="selectByUserIdAndMerchantId" resultType="com.project.demo.code.domain.DemoCartMetadata">
+        select cart_id,
+               coupon_id,
+               create_by,
+               create_date,
+               deleted,
+               merchant_id,
+               notes,
+               update_by,
+               update_date,
+               user_id,
+               version
+        from demo_cart_metadata
+        where user_id = #{userId}
+          and merchant_id = #{merchantId}
+          and deleted = 1
+    </select>
+</mapper>

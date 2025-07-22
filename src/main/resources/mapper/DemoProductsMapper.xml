@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.demo.code.mapper.DemoProductsMapper">
+    <!--resultMap 映射结果-->
+    <resultMap id="BaseResultMap" type="com.project.demo.code.domain.DemoProducts">
+        <id property="productId" column="product_id"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="productName" column="product_name"/>
+        <result property="price" column="price"/>
+        <result property="discountPrice" column="discount_price"/>
+        <result property="stock" column="stock"/>
+        <result property="productImage" column="product_image"/>
+        <result property="description" column="description"/>
+        <result property="status" column="status"/>
+        <result property="deleted" column="deleted"/>
+        <result property="version" column="version"/>
+        <result property="createDate" column="create_date"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="updateBy" column="update_by"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        merchant_id, category_id, product_name, price, discount_price, stock, product_image, `description`, `status`, deleted,
+        version, create_date, create_by, update_date, update_by
+    </sql>
+
+    <!--分页查询商品列表-->
+    <select id="page" resultType="com.project.demo.code.domain.DemoProducts">
+        select product_id,
+        <include refid="Base_Column_List"/>
+        from demo_products
+        where deleted = 1
+        <if test="command.productName != null and command.productName != ''">
+            and product_name like concat('%', #{command.name}, '%')
+        </if>
+        <if test="command.status != null">
+            and status = #{command.status}
+        </if>
+        <if test="command.merchantId != null">
+            and merchant_id = #{command.merchantId}
+        </if>
+        <if test="command.categoryId != null">
+            and category_id = #{command.categoryId}
+        </if>
+        <if test="command.productId != null">
+            and product_id = #{command.productId}
+        </if>
+    </select>
+
+    <!--查询商品详情-->
+    <select id="getProductById" resultType="com.project.demo.code.domain.DemoProducts">
+        select product_id,
+        <include refid="Base_Column_List"/>
+        from demo_products
+        where product_id = #{command.productId}
+        and deleted = 1
+    </select>
+
+    <!--根据商品ID查询商品详情（购物车校验 主要 单价 - 库存）-->
+    <select id="selectProductById" resultType="com.project.demo.code.domain.DemoProducts">
+        select product_id,product_name,price,discount_price,stock
+        from demo_products
+        where product_id = #{command.productId}
+        and deleted = 1
+        and status = 1
+    </select>
+
+    <!--删除商品-->
+    <update id="remove">
+        update demo_products
+        set deleted = 0
+        where product_id = #{command.productId}
+    </update>
+
+    <!--上架商品-->
+    <update id="activate">
+        update demo_products
+        set status = 1
+        where product_id = #{command.productId}
+    </update>
+
+    <!--下架商品-->
+    <update id="deactivate">
+        update demo_products
+        set status = 0
+        where product_id = #{command.productId}
+    </update>
+</mapper>

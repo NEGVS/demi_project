@@ -1,0 +1,66 @@
+package ${package.ServiceImpl};
+
+import ${package.Entity}.${entity};
+import ${package.Mapper}.${table.mapperName};
+#if(${generateService})
+import ${package.Service}.${table.serviceName};
+#end
+import ${superServiceImplClassPackage};
+import org.springframework.stereotype.Service;
+import java.util.List;
+/**
+ * <p>
+ * $!{table.comment} 服务实现类
+ * </p>
+ *
+ * @author ${author}
+ * @since ${date}
+ */
+@Service
+#if(${kotlin})
+open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperName}, ${entity}>()#if(${generateService}), ${table.serviceName}#end {
+
+}
+#else
+public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}>#if(${generateService}) implements ${table.serviceName}#end {
+
+        @Resource
+        private ${entity}Mapper ${entity.toLowerCase()}Mapper;
+
+        /**
+         * 根据ID查询
+         */
+        @Override
+        public ${entity} getById(Integer id) {
+        return ${entity.toLowerCase()}Mapper.selectById(id);
+        }
+        /**
+         * 查询所有字段（支持动态条件）
+         */
+        @Override
+        public List<${entity}> queryAll(${entity} vo) {
+        return ${entity.toLowerCase()}Mapper.selectAll(vo);
+        }
+        /**
+         * 根据ID更新数据
+         */
+        @Override
+        public Integer update(${entity} record) {
+        return ${entity.toLowerCase()}Mapper.updateById(record);
+        }
+        /**
+         * 根据ID删除数据（物理删除）
+         */
+        @Override
+        public Integer deleteById(Integer id) {
+        return ${entity.toLowerCase()}Mapper.deleteById(id);
+        }
+        /**
+         * 新增数据
+         */
+        @Override
+        public Integer insert(${entity} vo) {
+        return ${entity.toLowerCase()}Mapper.insert(vo);
+        }
+}
+#end
