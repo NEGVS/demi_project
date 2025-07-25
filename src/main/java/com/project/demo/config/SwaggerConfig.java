@@ -12,10 +12,10 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()
-                .info(new Info().title("阿呆 接口文档")
-                        .description("这是一个奇奇怪怪的测试接口文档")
+                .info(new Info().title("接口文档")
+                        .description("测试接口文档")
                         .version("v1.0")
-                        .contact(new Contact().name("hylogan").url("https://github.com/")))
+                        .contact(new Contact().name("andy").url("https://github.com/")))
                 .externalDocs(new ExternalDocumentation()
                         .description("未知描述")
                         .url("https://github.com/"));

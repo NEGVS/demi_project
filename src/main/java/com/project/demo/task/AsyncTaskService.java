@@ -3,6 +3,7 @@ package com.project.demo.task;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.project.demo.code.domain.TradingData;
 import com.project.demo.code.mapper.TradingDataMapper;
@@ -41,7 +42,7 @@ public class AsyncTaskService {
 
 
     @Async
-    public void executeAsyncTaskV2(List<String> dateList,String mail) {
+    public void executeAsyncTaskV2(List<String> dateList, String mail) {
         long start = System.currentTimeMillis();
         log.info("异步任务入参：{}", dateList);
         log.info("异步任务入参：{}", mail);
@@ -59,7 +60,7 @@ public class AsyncTaskService {
                 message.setTo("1933525074");
                 mailSender.send(message);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             log.info("发送邮件错误");
         }
     }
@@ -148,26 +149,28 @@ public class AsyncTaskService {
         options.addArguments("--disable-dev-shm-usage"); // 添加此选项
         WebDriver driver = new ChromeDriver(options);
         List<String> list = fetchLinks(driver);
-        log.info("一共有{}个链接", list.size());
+        log.info("\n\n一共有{}个链接", list.size());
         List<TradingData> insertList = new ArrayList<>();
         for (String s : list) {
             for (String month : dateList) {
                 String url = s + "/" + month;
                 try {
+                    log.info("\n\n开始抓取：{}", url);
                     scrapeDataFromPage2(driver, url, insertList);
                 } catch (IOException e) {
-                   log.info("执行任务异常：{}",e.getMessage());
+                    log.info("\n\n执行任务异常：{}", e.getMessage());
                 }
             }
         }
         log.info("插入的数据量：{}", insertList.size());
         driver.quit();
         // 创建线程池
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        ExecutorService executorService = Executors.newFixedThreadPool(10 * 2);
 
         List<List<TradingData>> tradingDataList = splitTradingDataList(insertList);
         for (List<TradingData> tradingList : tradingDataList) {
             executorService.submit(() -> {
+                log.info("\n\n----开始插入数据：{}", JSONUtil.toJsonStr(tradingList));
                 // 模拟数据库提交操作
                 tradingDataMapper.insertList(tradingList);
             });
@@ -196,7 +199,7 @@ public class AsyncTaskService {
         LambdaQueryWrapper<TradingData> queryWrapper = new LambdaQueryWrapper<>();
         // 将传入的日期的数据全部删除，重新插入
         queryWrapper.eq(TradingData::getDate, result.tableBuyTileArray()[0]).eq(TradingData::getCommodity, result.table_buy_title_list().get(0));
-        if (tradingDataMapper.selectCount(queryWrapper) > 0){
+        if (tradingDataMapper.selectCount(queryWrapper) > 0) {
             tradingDataMapper.delete(queryWrapper);
         }
         // 多单
