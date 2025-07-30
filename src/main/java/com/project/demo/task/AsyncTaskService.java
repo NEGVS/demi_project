@@ -175,7 +175,7 @@ public class AsyncTaskService {
                 tradingDataMapper.insertList(tradingList);
             });
         }
-        // 关闭线程池
+        // 关闭线程池--
         executorService.shutdown();
     }
 
