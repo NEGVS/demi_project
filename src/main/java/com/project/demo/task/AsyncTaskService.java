@@ -196,12 +196,12 @@ public class AsyncTaskService {
         // 查找特定元素下的表格
         Result result = getResult(driver);
         // 使用 LambdaQueryWrapper 构造删除条件
-        LambdaQueryWrapper<TradingData> queryWrapper = new LambdaQueryWrapper<>();
-        // 将传入的日期的数据全部删除，重新插入
-        queryWrapper.eq(TradingData::getDate, result.tableBuyTileArray()[0]).eq(TradingData::getCommodity, result.table_buy_title_list().get(0));
-        if (tradingDataMapper.selectCount(queryWrapper) > 0) {
-            tradingDataMapper.delete(queryWrapper);
-        }
+//        LambdaQueryWrapper<TradingData> queryWrapper = new LambdaQueryWrapper<>();
+//        // 将传入的日期的数据全部删除，重新插入
+//        queryWrapper.eq(TradingData::getDate, result.tableBuyTileArray()[0]).eq(TradingData::getCommodity, result.table_buy_title_list().get(0));
+//        if (tradingDataMapper.selectCount(queryWrapper) > 0) {
+//            tradingDataMapper.delete(queryWrapper);
+//        }
         // 多单
         for (WebElement webElement : result.table_buy()) {
             if (webElement.getAttribute("class").contains("opacity05")) {

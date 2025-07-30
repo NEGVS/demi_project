@@ -21,3 +21,13 @@ mybatis-plus:
 
 jwt:
   isTest: true
+#ShfeDataService 添加重试机制和超时配置(在application.yml),
+#连接超时（connectTimeout）设为5秒
+#读取超时（readTimeout）设为5秒
+shfe:
+  api:
+    connect-timeout: 50000
+    read-timeout: 50000
+#spring.application.name=shfe-data-parser server.port=8080
+#  shfe.api.connect-timeout=5000
+#  shfe.api.read-timeout=5000

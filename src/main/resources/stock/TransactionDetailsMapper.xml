@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.demo.tradingDetail.mapper.TransactionDetailsMapper">
+
+    <resultMap type="com.project.demo.tradingDetail.domain.com.project.demo.tradingDetail.domain.TransactionDetails" id="TransactionDetailsResult">
+        <result property="id" column="id"/>
+        <result property="ranking" column="ranking"/>
+        <result property="memberName" column="memberName"/>
+        <result property="memberName2" column="memberName2"/>
+        <result property="memberName3" column="memberName3"/>
+        <result property="contractCode" column="contractCode"/>
+        <result property="transactionType" column="transactionType"/>
+        <result property="totalVolume" column="totalVolume"/>
+        <result property="volumeChange" column="volumeChange"/>
+        <result property="transactionDate" column="transactionDate"/>
+        <result property="futuresVariety" column="futuresVariety"/>
+        <result property="exchangeName" column="exchangeName"/>
+        <result property="created_time" column="created_time"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ranking, memberName, memberName3, memberName2, contractCode, transactionType, totalVolume, volumeChange, transactionDate, futuresVariety, exchangeName, created_time
+    </sql>
+    <sql id="selectTransactionDetailsVo">
+        select id,
+               ranking,
+               memberName,
+               memberName2,
+               memberName3,
+               contractCode,
+               transactionType,
+               totalVolume,
+               volumeChange,
+               transactionDate,
+               futuresVariety,
+               exchangeName,
+               created_time
+        from transaction_details
+    </sql>
+
+    <select id="selectTransactionDetailsList" parameterType="com.project.demo.tradingDetail.domain.TransactionDetails" resultMap="TransactionDetailsResult">
+        <include refid="selectTransactionDetailsVo"/>
+        <where>
+            <if test="ranking != null  and ranking != ''">and ranking = #{ranking}</if>
+            <if test="memberName != null  and memberName != ''">and memberName like concat('%', #{memberName}, '%')</if>
+            <if test="memberName != null  and memberName != ''">and memberName2 like concat('%', #{memberName2}, '%')</if>
+            <if test="memberName != null  and memberName != ''">and memberName3 like concat('%', #{memberName3}, '%')</if>
+            <if test="contractCode != null  and contractCode != ''">and contractCode = #{contractCode}</if>
+            <if test="transactionType != null ">and transactionType = #{transactionType}</if>
+            <if test="totalVolume != null ">and totalVolume = #{totalVolume}</if>
+            <if test="volumeChange != null ">and volumeChange = #{volumeChange}</if>
+            <if test="transactionDate != null ">and transactionDate = #{transactionDate}</if>
+            <if test="futuresVariety != null  and futuresVariety != ''">and futuresVariety like concat('%', #{futuresVariety}, '%')</if>
+            <if test="exchangeName != null  and exchangeName != ''">and exchangeName like concat('%', #{exchangeName},
+                '%')
+            </if>
+            <if test="startDate != null ">and created_time >= #{startDate}</if>
+            <if test="endDate != null ">and created_time &lt; #{endDate}</if>
+        </where>
+    </select>
+
+    <select id="selectTransactionDetailsById" parameterType="Long" resultMap="TransactionDetailsResult">
+        <include refid="selectTransactionDetailsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTransactionDetails" parameterType="com.project.demo.tradingDetail.domain.TransactionDetails" useGeneratedKeys="true" keyProperty="id">
+        insert into transaction_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ranking != null">ranking,</if>
+            <if test="memberName != null">memberName,</if>
+            <if test="memberName2 != null">memberName2,</if>
+            <if test="memberName3 != null">memberName3,</if>
+            <if test="contractCode != null">contractCode,</if>
+            <if test="transactionType != null">transactionType,</if>
+            <if test="totalVolume != null">totalVolume,</if>
+            <if test="volumeChange != null">volumeChange,</if>
+            <if test="transactionDate != null">transactionDate,</if>
+            <if test="futuresVariety != null">futuresVariety,</if>
+            <if test="exchangeName != null">exchangeName,</if>
+            <if test="createdTime != null">created_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ranking != null">#{ranking},</if>
+            <if test="memberName != null">#{memberName},</if>
+            <if test="memberName2 != null">#{memberName3},</if>
+            <if test="memberName2 != null">#{memberName3},</if>
+            <if test="contractCode != null">#{contractCode},</if>
+            <if test="transactionType != null">#{transactionType},</if>
+            <if test="totalVolume != null">#{totalVolume},</if>
+            <if test="volumeChange != null">#{volumeChange},</if>
+            <if test="transactionDate != null">#{transactionDate},</if>
+            <if test="futuresVariety != null">#{futuresVariety},</if>
+            <if test="exchangeName != null">#{exchangeName},</if>
+            <if test="createdTime != null">#{createdTime},</if>
+        </trim>
+    </insert>
+
+    <!--批量插入客户-->
+    <insert id="insertTransactionDetailsList" parameterType="com.project.demo.tradingDetail.domain.TransactionDetails" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+        transaction_details (<include refid="Base_Column_List"/>)
+        VALUES
+        <foreach collection="list" item="x" index="index" separator=",">
+            #{x.ranking}, #{x.memberName}, #{x.memberName3}, #{x.memberName2}, #{x.contractCode}, #{x.transactionType}, #{x.totalVolume}, #{x.volumeChange}, #{x.transactionDate}, #{x.futuresVariety}, #{x.exchangeName}, #{x.createdTime})
+        </foreach>
+    </insert>
+
+    <update id="updateTransactionDetails" parameterType="com.project.demo.tradingDetail.domain.TransactionDetails">
+        update transaction_details
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="ranking != null">ranking = #{ranking},</if>
+            <if test="memberName != null">memberName = #{memberName},</if>
+            <if test="memberName2 != null">memberName2 = #{memberName2},</if>
+            <if test="memberName3 != null">memberName3 = #{memberName3},</if>
+            <if test="contractCode != null">contractCode = #{contractCode},</if>
+            <if test="transactionType != null">transactionType = #{transactionType},</if>
+            <if test="totalVolume != null">totalVolume = #{totalVolume},</if>
+            <if test="volumeChange != null">volumeChange = #{volumeChange},</if>
+            <if test="transactionDate != null">transactionDate = #{transactionDate},</if>
+            <if test="futuresVariety != null">futuresVariety = #{futuresVariety},</if>
+            <if test="exchangeName != null">exchangeName = #{exchangeName},</if>
+            <if test="createdTime != null">created_time = #{createdTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTransactionDetailsById" parameterType="Long">
+        delete
+        from transaction_details
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteTransactionDetailsByIds" parameterType="String">
+        delete from transaction_details where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
