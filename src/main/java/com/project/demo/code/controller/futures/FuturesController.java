@@ -43,19 +43,23 @@ public class FuturesController {
     @GetMapping("/graspingDataV2")
     @Operation(summary = "同步期货数据")
     public Result<String> graspingDataV2(@RequestParam(value = "startDate") String startDate, @RequestParam(value = "endDate", required = false) String endDate, String mail) {
-        log.info("同步期货数据入参：{},{},{}", startDate , endDate , mail);
-        if (StrUtil.isBlank(startDate)){
+        log.info("同步期货数据入参：{},{},{}", startDate, endDate, mail);
+        if (StrUtil.isBlank(startDate)) {
             return Result.error("（startDate）开始时间不能为空");
         }
-        if (StrUtil.isBlank(endDate)){
-            endDate = DateUtil.format(new Date(),"yyyyMMdd");
+        if (StrUtil.isBlank(endDate)) {
+            endDate = DateUtil.format(new Date(), "yyyyMMdd");
         }
         List<String> list = MyUtil.calculateWorkdays(startDate, endDate);
+
         if (CollUtil.isEmpty(list)) {
             return Result.error("没有合适的数据：这几天都是休息日！");
+        } else {
+            log.info("开始同步数据：{}", list);
         }
-        asyncTaskService.executeAsyncTaskV2(list,mail);
-        return Result.success("异步任务启动成功");
+//        .subList(0, list.size() - 1)
+        asyncTaskService.executeAsyncTaskV2(list, mail);
+        return Result.success("异步任务启动成功,请留意邮箱结果");
     }
 
     @GetMapping("/get")

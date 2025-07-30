@@ -39,7 +39,6 @@ public class TimedTask {
     // 定义定时任务
     @Scheduled(cron = "0 0 16 * * ?")
     public void performTask() {
-        // 在这里编写你的任务逻辑
         System.out.println("执行定时任务: " + java.time.LocalDateTime.now());
         String nowDate = DateUtil.format(new Date(), "yyyyMMdd");
         List<String> dateList = MyUtil.calculateWorkdays(nowDate, nowDate);
@@ -73,7 +72,7 @@ public class TimedTask {
         }
     }
 
-    @Scheduled(cron = "0 1 0 * * ? ")
+//    @Scheduled(cron = "0 1 0 * * ? ")
     public void xuLiAL() throws JsonProcessingException {
         log.info("蓄力AL签到、分享");
         XuLiAlUtil.sign(null);
