@@ -128,7 +128,7 @@ public class AsyncTaskService {
 
     private List<String> fetchLinks(WebDriver driver) {
         driver.get("https://cc.17kqh.com/");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         log.info("获取链接信息开始");
 
         List<WebElement> webElements = driver.findElements(By.cssSelector("body > div.container > div:nth-child(3) > div > div > div > ul > li > a"));
@@ -190,7 +190,7 @@ public class AsyncTaskService {
             // 模拟点击事件（切换表格显示）
             button.click();
             // 等待10秒页面刷新
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > div.type_table > div > div")));
         }
         // 查找特定元素下的表格
