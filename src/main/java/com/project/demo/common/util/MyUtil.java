@@ -10,6 +10,22 @@ import java.util.Set;
 
 public class MyUtil {
 
+    public static String getDateyyyy_MM_dd(String inputDate) {
+
+        // 定义输入和输出的格式
+        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        // 解析输入字符串为 LocalDate
+        LocalDate date = LocalDate.parse(inputDate, inputFormatter);
+
+        // 格式化为目标格式
+        String formattedDate = date.format(outputFormatter);
+        System.out.println(inputDate);
+        System.out.println("---->");
+        System.out.println(formattedDate);
+        return formattedDate;
+    }
 
     // 假设这是一部分中国的法定节假日（可以根据需要补充）
     private static final Set<LocalDate> holidays = new HashSet<>();

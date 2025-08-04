@@ -1,4 +1,4 @@
-package com.project.demo.task.selenium.service;
+package com.project.demo.selenium.service;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;

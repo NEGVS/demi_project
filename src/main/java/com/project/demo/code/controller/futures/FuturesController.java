@@ -11,6 +11,7 @@ import com.project.demo.common.JSONAuthentication;
 import com.project.demo.common.Result;
 import com.project.demo.common.util.MyUtil;
 import com.project.demo.task.AsyncTaskService;
+import com.project.demo.selenium.zhengZhou.ZhengZhouService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -30,6 +31,20 @@ public class FuturesController {
     private TradingDataService tradingDataService;
     @Resource
     private AsyncTaskService asyncTaskService;
+    @Resource
+    private ZhengZhouService zhengZhouService;
+
+    /**
+     * zhengZhouService
+     */
+    @PostMapping("/zhengZhou")
+    @Operation(summary = "zhengZhouService")
+    public Result<IPage<TradingData>> zhengZhou() {
+        log.info("\n---------zhengZhouService");
+//        zhengZhouService.getZhengZhouData();
+        zhengZhouService.performSearch("111");
+        return null;
+    }
 
     /**
      * 查询爬取的期货数据
@@ -43,18 +58,18 @@ public class FuturesController {
     @GetMapping("/graspingDataV2")
     @Operation(summary = "同步期货数据")
     public Result<String> graspingDataV2(@RequestParam(value = "startDate") String startDate, @RequestParam(value = "endDate", required = false) String endDate, String mail) {
-        log.info("同步期货数据入参：{},{},{}", startDate , endDate , mail);
-        if (StrUtil.isBlank(startDate)){
+        log.info("同步期货数据入参：{},{},{}", startDate, endDate, mail);
+        if (StrUtil.isBlank(startDate)) {
             return Result.error("（startDate）开始时间不能为空");
         }
-        if (StrUtil.isBlank(endDate)){
-            endDate = DateUtil.format(new Date(),"yyyyMMdd");
+        if (StrUtil.isBlank(endDate)) {
+            endDate = DateUtil.format(new Date(), "yyyyMMdd");
         }
         List<String> list = MyUtil.calculateWorkdays(startDate, endDate);
         if (CollUtil.isEmpty(list)) {
             return Result.error("没有合适的数据：这几天都是休息日！");
         }
-        asyncTaskService.executeAsyncTaskV2(list,mail);
+        asyncTaskService.executeAsyncTaskV2(list, mail);
         return Result.success("异步任务启动成功");
     }
 

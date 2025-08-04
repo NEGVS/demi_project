@@ -1,4 +1,4 @@
-package com.project.demo.task.selenium;
+package com.project.demo.selenium.test;
 
 
 import org.openqa.selenium.By;
@@ -14,7 +14,7 @@ import java.time.Duration;
  * @Date 2025/7/22 10:15
  * @ClassName seleniumTest
  */
-public class seleniumTest {
+public class SeleniumTest {
     public static void main(String[] args) {
         //打开百度浏览器
         System.out.println("hello world");

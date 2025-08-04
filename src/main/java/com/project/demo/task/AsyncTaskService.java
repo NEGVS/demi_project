@@ -7,6 +7,7 @@ import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.project.demo.code.domain.TradingData;
 import com.project.demo.code.mapper.TradingDataMapper;
+import com.project.demo.common.util.MyUtil;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
@@ -29,6 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @Slf4j
@@ -40,12 +42,27 @@ public class AsyncTaskService {
     @Resource
     private JavaMailSender mailSender;
 
-
+    /**
+     * 1- Async executeAsyncTaskV2
+     */
     @Async
     public void executeAsyncTaskV2(List<String> dateList, String mail) {
         long start = System.currentTimeMillis();
-        log.info("异步任务入参：{}", dateList);
-        log.info("异步任务入参：{}", mail);
+        log.info("异步任务入参：{}, mail:{}", dateList, mail);
+        for (String s : dateList) {
+            LambdaQueryWrapper<TradingData> queryWrapper = new LambdaQueryWrapper<>();
+            queryWrapper.eq(TradingData::getDate, MyUtil.getDateyyyy_MM_dd(s));
+            int delete = tradingDataMapper.delete(queryWrapper);
+            if (delete > 0) {
+                log.info(s + "数据清除成功");
+            } else {
+                log.info(s + "数据清除失败");
+            }
+        }
+
+
+//        getDateyyyy_MM_dd
+
         graspingDataV4(dateList);
         System.out.println("异步任务执行完毕，耗时：" + (System.currentTimeMillis() - start) + "毫秒");
         try {
@@ -66,6 +83,9 @@ public class AsyncTaskService {
     }
 
 
+    /**
+     * 批量插入
+     */
     private static List<List<TradingData>> splitTradingDataList(List<TradingData> list) {
         List<List<TradingData>> partitions = new ArrayList<>();
         for (int i = 0; i < list.size(); i += AsyncTaskService.BATCH_SIZE) {
@@ -126,11 +146,13 @@ public class AsyncTaskService {
         }
     }
 
+    /**
+     * 获取链接信息
+     */
     private List<String> fetchLinks(WebDriver driver) {
         driver.get("https://cc.17kqh.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         log.info("获取链接信息开始");
-
         List<WebElement> webElements = driver.findElements(By.cssSelector("body > div.container > div:nth-child(3) > div > div > div > ul > li > a"));
         List<String> list = new ArrayList<>();
         for (WebElement webElement : webElements) {
@@ -140,6 +162,9 @@ public class AsyncTaskService {
         return list;
     }
 
+    /**
+     * 2-
+     */
     public void graspingDataV4(List<String> dateList) {
         // 创建固定大小的线程池
         // 获取所有的链接
@@ -147,6 +172,9 @@ public class AsyncTaskService {
         options.addArguments("--headless"); // 如果需要无头模式
         options.addArguments("--no-sandbox"); // 添加此选项
         options.addArguments("--disable-dev-shm-usage"); // 添加此选项
+
+        options.addArguments("--blink-settings=imagesEnabled=false"); // 禁用图片加载
+
         WebDriver driver = new ChromeDriver(options);
         List<String> list = fetchLinks(driver);
         log.info("\n\n一共有{}个链接", list.size());
@@ -162,23 +190,27 @@ public class AsyncTaskService {
                 }
             }
         }
-        log.info("插入的数据量：{}", insertList.size());
         driver.quit();
-        // 创建线程池
-        ExecutorService executorService = Executors.newFixedThreadPool(10 * 2);
 
+        // 创建线程池
+        log.info("=========开始插入数据");
+        ExecutorService executorService = Executors.newFixedThreadPool(10 * 2);
         List<List<TradingData>> tradingDataList = splitTradingDataList(insertList);
         for (List<TradingData> tradingList : tradingDataList) {
             executorService.submit(() -> {
-                log.info("\n\n----开始插入数据：{}", JSONUtil.toJsonStr(tradingList));
+                log.info("\n\n----插入数据：{}条", tradingList.size());
                 // 模拟数据库提交操作
                 tradingDataMapper.insertList(tradingList);
             });
         }
+        log.info("插入数据完成,总共 = " + insertList.size());
         // 关闭线程池
         executorService.shutdown();
     }
 
+    /**
+     * 3-抓取数据
+     */
     private void scrapeDataFromPage2(WebDriver driver, String url, List<TradingData> insertList) throws IOException {
         driver.get(url);
         // 找到对应的数据地址
@@ -212,8 +244,10 @@ public class AsyncTaskService {
         // 空单
         getTableSale(result.table_sale(), result.table_sale_title_list(), result.tableSaleTileArray(), result.data());
         // 组装数据
+        AtomicInteger index = new AtomicInteger(0);
         for (List<String> datum : result.data()) {
             if (datum.size() == 7) {
+                log.info("开始组装数据--" + index.getAndIncrement());
                 TradingData tradingData = new TradingData();
                 tradingData.setSeat(datum.get(0));
                 try {
@@ -228,5 +262,57 @@ public class AsyncTaskService {
     private record Result(List<WebElement> table_buy, List<WebElement> table_sale, List<String> table_buy_title_list,
                           String[] tableBuyTileArray, List<String> table_sale_title_list, String[] tableSaleTileArray,
                           List<List<String>> data) {
+    }
+
+    /**
+     * 3-抓取数据
+     */
+    public void scrapeZhengZhouDataFromHtm(WebDriver driver, String url) throws IOException {
+        driver.get(url);
+        try {
+            // 等待页面加载
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            // 等待目标元素可见
+            WebElement display = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.cssSelector("body > div.desktop > div > div:nth-child(1) > div")));
+
+            // 检查 style 属性
+            String style = display.getAttribute("style");
+            if (!style.contains("display: none")) {
+                WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("#switch")));
+                button.click();
+
+                // 等待表格显示
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("body > div.type_table > div > div")));
+            }
+            // 查找特定元素下的表格
+            AsyncTaskService.Result result = getResult(driver);
+            // 多单
+            for (WebElement webElement : result.table_buy()) {
+                if (webElement.getAttribute("class").contains("opacity05")) {
+                    continue;
+                }
+                getRowData(webElement, result.tableBuyTileArray(), result.table_buy_title_list(), result.data());
+            }
+            // 空单
+            getTableSale(result.table_sale(), result.table_sale_title_list(), result.tableSaleTileArray(), result.data());
+            // 组装数据
+            AtomicInteger index = new AtomicInteger(0);
+            for (List<String> datum : result.data()) {
+                if (datum.size() == 7) {
+                    log.info("开始组装数据--" + index.getAndIncrement());
+                    try {
+                    } catch (NumberFormatException e) {
+                        System.out.println("详情异常" + e.getMessage());
+                    }
+                }
+            }
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            log.error("无法找到元素: {}", e.getMessage());
+            throw new IOException("页面元素未找到", e);
+        } catch (org.openqa.selenium.TimeoutException e) {
+            log.error("等待元素超时: {}", e.getMessage());
+            throw new IOException("页面加载超时", e);
+        }
     }
 }

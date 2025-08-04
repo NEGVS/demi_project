@@ -1,5 +1,5 @@
 server:
-  port: 7860
+  port: 8084
 # spring-doc 接口文档
 springdoc:
   api-docs:
