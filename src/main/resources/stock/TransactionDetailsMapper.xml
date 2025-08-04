@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.demo.tradingDetail.mapper.TransactionDetailsMapper">
 
-    <resultMap type="com.project.demo.tradingDetail.domain.com.project.demo.tradingDetail.domain.TransactionDetails" id="TransactionDetailsResult">
+    <resultMap type="com.project.demo.tradingDetail.domain.TransactionDetails" id="TransactionDetailsResult">
         <result property="id" column="id"/>
         <result property="ranking" column="ranking"/>
         <result property="memberName" column="memberName"/>
@@ -17,11 +17,12 @@
         <result property="transactionDate" column="transactionDate"/>
         <result property="futuresVariety" column="futuresVariety"/>
         <result property="exchangeName" column="exchangeName"/>
-        <result property="created_time" column="created_time"/>
+        <result property="createdTime" column="created_time"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        ranking, memberName, memberName3, memberName2, contractCode, transactionType, totalVolume, volumeChange, transactionDate, futuresVariety, exchangeName, created_time
+        ranking
+        , memberName, memberName3, memberName2, contractCode, transactionType, totalVolume, volumeChange, transactionDate, futuresVariety, exchangeName, created_time
     </sql>
     <sql id="selectTransactionDetailsVo">
         select id,
@@ -40,21 +41,22 @@
         from transaction_details
     </sql>
 
-    <select id="selectTransactionDetailsList" parameterType="com.project.demo.tradingDetail.domain.TransactionDetails" resultMap="TransactionDetailsResult">
+    <select id="selectTransactionDetailsList" parameterType="com.project.demo.tradingDetail.domain.TransactionDetails"
+            resultMap="TransactionDetailsResult">
         <include refid="selectTransactionDetailsVo"/>
         <where>
             <if test="ranking != null  and ranking != ''">and ranking = #{ranking}</if>
             <if test="memberName != null  and memberName != ''">and memberName like concat('%', #{memberName}, '%')</if>
-            <if test="memberName != null  and memberName != ''">and memberName2 like concat('%', #{memberName2}, '%')</if>
-            <if test="memberName != null  and memberName != ''">and memberName3 like concat('%', #{memberName3}, '%')</if>
             <if test="contractCode != null  and contractCode != ''">and contractCode = #{contractCode}</if>
             <if test="transactionType != null ">and transactionType = #{transactionType}</if>
             <if test="totalVolume != null ">and totalVolume = #{totalVolume}</if>
             <if test="volumeChange != null ">and volumeChange = #{volumeChange}</if>
             <if test="transactionDate != null ">and transactionDate = #{transactionDate}</if>
-            <if test="futuresVariety != null  and futuresVariety != ''">and futuresVariety like concat('%', #{futuresVariety}, '%')</if>
-            <if test="exchangeName != null  and exchangeName != ''">and exchangeName like concat('%', #{exchangeName},
-                '%')
+            <if test="futuresVariety != null  and futuresVariety != ''">and futuresVariety like concat('%',
+                #{futuresVariety}, '%')
+            </if>
+            <if test="exchangeName != null  and exchangeName != ''">and exchangeName like concat('%',
+                #{exchangeName},'%')
             </if>
             <if test="startDate != null ">and created_time >= #{startDate}</if>
             <if test="endDate != null ">and created_time &lt; #{endDate}</if>
@@ -66,7 +68,15 @@
         where id = #{id}
     </select>
 
-    <insert id="insertTransactionDetails" parameterType="com.project.demo.tradingDetail.domain.TransactionDetails" useGeneratedKeys="true" keyProperty="id">
+    <!--select distinct memberName-->
+    <select id="selectMemberNames" resultMap="TransactionDetailsResult">
+        SELECT DISTINCT memberName
+        FROM transaction_details
+        ORDER BY memberName DESC
+    </select>
+
+    <insert id="insertTransactionDetails" parameterType="com.project.demo.tradingDetail.domain.TransactionDetails"
+            useGeneratedKeys="true" keyProperty="id">
         insert into transaction_details
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="ranking != null">ranking,</if>
@@ -99,12 +109,15 @@
     </insert>
 
     <!--批量插入客户-->
-    <insert id="insertTransactionDetailsList" parameterType="com.project.demo.tradingDetail.domain.TransactionDetails" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertTransactionDetailsList" parameterType="com.project.demo.tradingDetail.domain.TransactionDetails"
+            useGeneratedKeys="true" keyProperty="id">
         INSERT INTO
         transaction_details (<include refid="Base_Column_List"/>)
         VALUES
         <foreach collection="list" item="x" index="index" separator=",">
-            #{x.ranking}, #{x.memberName}, #{x.memberName3}, #{x.memberName2}, #{x.contractCode}, #{x.transactionType}, #{x.totalVolume}, #{x.volumeChange}, #{x.transactionDate}, #{x.futuresVariety}, #{x.exchangeName}, #{x.createdTime})
+            (#{x.ranking}, #{x.memberName}, #{x.memberName3}, #{x.memberName2}, #{x.contractCode}, #{x.transactionType},
+            #{x.totalVolume}, #{x.volumeChange}, #{x.transactionDate}, #{x.futuresVariety}, #{x.exchangeName},
+            #{x.createdTime})
         </foreach>
     </insert>
 

@@ -10,8 +10,10 @@ import com.project.demo.code.service.TradingDataService;
 import com.project.demo.common.JSONAuthentication;
 import com.project.demo.common.Result;
 import com.project.demo.common.util.MyUtil;
+import com.project.demo.selenium.test.TableDataExtractor;
 import com.project.demo.task.AsyncTaskService;
 import com.project.demo.selenium.zhengZhou.ZhengZhouService;
+import com.project.demo.tradingDetail.domain.TransactionDetails;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
@@ -33,17 +35,30 @@ public class FuturesController {
     private AsyncTaskService asyncTaskService;
     @Resource
     private ZhengZhouService zhengZhouService;
+    @Resource
+    private TableDataExtractor tableDataExtractor;
+
+    /**
+     * zhengZhouService
+     */
+    @PostMapping("/zhengZhouFile")
+    @Operation(summary = "zhengZhouFile")
+    public Result<TransactionDetails> zhengZhouFile(String path) {
+        log.info("\n---------zhengZhouService");
+        tableDataExtractor.addCommodity(path);
+        return Result.success();
+    }
 
     /**
      * zhengZhouService
      */
     @PostMapping("/zhengZhou")
     @Operation(summary = "zhengZhouService")
-    public Result<IPage<TradingData>> zhengZhou() {
+    public Result<TransactionDetails> zhengZhou() {
         log.info("\n---------zhengZhouService");
 //        zhengZhouService.getZhengZhouData();
         zhengZhouService.performSearch("111");
-        return null;
+        return Result.success();
     }
 
     /**
