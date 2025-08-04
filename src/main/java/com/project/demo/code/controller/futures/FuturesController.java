@@ -6,6 +6,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.project.demo.code.command.system.futures.FuturesQueryCommand;
 import com.project.demo.code.domain.TradingData;
+import com.project.demo.code.selenium.service.AsyncTaskServiceB;
 import com.project.demo.code.selenium.zhengZhou.TableDataExtractor;
 import com.project.demo.code.service.TradingDataService;
 import com.project.demo.common.JSONAuthentication;
@@ -20,6 +21,8 @@ import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,11 +41,25 @@ public class FuturesController {
     @Resource
     private TableDataExtractor tableDataExtractor;
 
+    @Resource
+    private AsyncTaskServiceB asyncTaskServiceB;
+
+    /**
+     * zhengZhouService
+     */
+    @PostMapping("/asyncTaskServiceB")
+    @Operation(summary = "asyncTaskServiceB", description = "asyncTaskServiceB")
+    public Result<TransactionDetails> asyncTaskServiceB(String date) throws IOException {
+        log.info("\n---------asyncTaskServiceB");
+        asyncTaskServiceB.executeAsyncTaskV_B(new ArrayList<>(), null);
+        return Result.success();
+    }
+
     /**
      * zhengZhouService
      */
     @PostMapping("/zhengZhouFile")
-    @Operation(summary = "zhengZhouFile")
+    @Operation(summary = "zhengZhouFile", description = "zhengZhouFile")
     public Result<TransactionDetails> zhengZhouFile(String path) {
         log.info("\n---------zhengZhouService");
         tableDataExtractor.addCommodity(path);

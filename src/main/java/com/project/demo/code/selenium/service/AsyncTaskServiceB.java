@@ -2,9 +2,11 @@ package com.project.demo.code.selenium.service;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.project.demo.code.domain.TradingData;
 import com.project.demo.code.mapper.TradingDataMapper;
+import com.project.demo.code.tradingDetail.domain.TransactionDetails;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
@@ -53,11 +55,98 @@ public class AsyncTaskServiceB {
      * @param mail     邮箱
      */
     @Async
-    public void executeAsyncTaskV2(List<String> dateList, String mail) {
+    public void executeAsyncTaskV_B(List<String> dateList, String mail) throws IOException {
+        try {
+            long start = System.currentTimeMillis();
+            log.info("异步任务入参：{},mail {}", dateList, mail);
+            if (ObjectUtil.isEmpty(dateList)) {
+                dateList.add("20250801");
+                log.info("异步任务入参为空，使用默认参数: 20250801");
+            }
+            if (mail == null) {
+                mail = "andyfaupassion@gmail.com";
+                log.info("异步任务入参为空，使用默认参数 mail: andyfaupassion@gmail.com");
+            }
+            // 获取所有的链接
+            long startTime = System.currentTimeMillis();
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless"); // 如果需要无头模式
+            options.addArguments("--no-sandbox"); // 添加此选项
+            options.addArguments("--disable-dev-shm-usage"); // 添加此选项
+            WebDriver driver = new ChromeDriver(options);
+            String url_b = "http://www.czce.com.cn/cn/DFSStaticFiles/Future/2025/20250801/FutureDataHolding.htm";
+            String url_a = "/Users/andy_mac/Documents/CodeSpace/andyProject0/demi_project/src/main/java/com/project/demo/code/selenium/file/aaa.htm";
+            List<TransactionDetails> insertList = new ArrayList<>();
+
+            try {
+                driver.get(url_b);
+                //等待页面加载完成
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+                wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("table")));
+//                wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("body > div.type_table > div > div > table")));
+
+                // 提取表格数据
+                List<WebElement> tables = driver.findElements(By.tagName("table"));
+                for (WebElement table : tables) {
+
+                }
+                // 提取表格数据
+                for (WebElement table : tables) {
+                    String variety = table.findElement(By.cssSelector("tbody > tr:nth-child(1) > td")).getText().split("品种：")[1].split(" ")[0];
+                    List<WebElement> rows = table.findElements(By.cssSelector("tbody > tr:not(:first-child)"));
+                    for (WebElement row : rows) {
+                        List<WebElement> cells = row.findElements(By.cssSelector("td"));
+                        String[] result = new String[10];
+                        String text = cells.get(1).getText();
+                        System.out.println(text);
+                        if (cells.size() >= 10) {
+                            TransactionDetails details = new TransactionDetails();
+//                            details.setVariety(variety);
+//                            details.setDate("20250801");
+//                            details.setRank(Integer.parseInt(cells.get(0).getText()));
+//                            details.setBrokerName1(cells.get(1).getText());
+//                            details.setTradingVolume(Integer.parseInt(cells.get(2).getText().replace(",", "")));
+//                            details.setVolumeChange(Integer.parseInt(cells.get(3).getText().replace(",", "")));
+//                            details.setBrokerName2(cells.get(4).getText());
+//                            details.setBuyPosition(Integer.parseInt(cells.get(5).getText().replace(",", "")));
+//                            details.setBuyPositionChange(Integer.parseInt(cells.get(6).getText().replace(",", "")));
+//                            details.setBrokerName3(cells.get(7).getText());
+//                            details.setSellPosition(Integer.parseInt(cells.get(8).getText().replace(",", "")));
+//                            details.setSellPositionChange(Integer.parseInt(cells.get(9).getText().replace(",", "")));
+                            insertList.add(details);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                log.error("处理交易数据失败: {}", e.getMessage(), e);
+            } finally {
+                driver.quit();
+                log.info("WebDriver 已关闭");
+            }
+        } catch (Exception e) {
+            log.error("处理交易数据失败: {}", e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 1-抓取数据
+     *
+     * @param dateList 日期集合
+     * @param mail     邮箱
+     */
+    @Async
+    public void executeAsyncTaskV1(List<String> dateList, String mail) throws IOException {
         long start = System.currentTimeMillis();
-        log.info("异步任务入参：{}", dateList);
-        log.info("异步任务入参：{}", mail);
-        graspingDataV4(dateList);
+        log.info("异步任务入参：{},mail {}", dateList, mail);
+        if (ObjectUtil.isEmpty(dateList)) {
+            dateList.add("20250801");
+            log.info("异步任务入参为空，使用默认参数: 20250801");
+        }
+        if (mail == null) {
+            mail = "andyfaupassion@gmail.com";
+            log.info("异步任务入参为空，使用默认参数 mail: andyfaupassion@gmail.com");
+        }
+        graspingDataV2(dateList);
         System.out.println("异步任务执行完毕，耗时：" + (System.currentTimeMillis() - start) + "毫秒");
         try {
             if (StrUtil.isNotBlank(mail)) {
@@ -137,21 +226,31 @@ public class AsyncTaskServiceB {
         }
     }
 
+    /**
+     * 2.5-获取链接
+     *
+     * @param driver driver
+     * @return list
+     */
     private List<String> fetchLinks(WebDriver driver) {
         driver.get("https://cc.17kqh.com/");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         log.info("获取链接信息开始");
-
         List<WebElement> webElements = driver.findElements(By.cssSelector("body > div.container > div:nth-child(3) > div > div > div > ul > li > a"));
         List<String> list = new ArrayList<>();
         for (WebElement webElement : webElements) {
             list.add(webElement.getAttribute("href"));
         }
-        log.info("获取链接信息结束");
+        log.info("获取链接信息结束: " + list.size());
         return list;
     }
 
-    public void graspingDataV4(List<String> dateList) {
+    /**
+     * 2--抓取数据
+     *
+     * @param dateList dateList
+     */
+    public void graspingDataV2(List<String> dateList) throws IOException {
         // 创建固定大小的线程池
         // 获取所有的链接
         long startTime = System.currentTimeMillis();
