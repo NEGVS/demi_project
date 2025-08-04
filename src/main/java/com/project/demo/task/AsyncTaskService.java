@@ -3,7 +3,6 @@ package com.project.demo.task;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.project.demo.code.domain.TradingData;
 import com.project.demo.code.mapper.TradingDataMapper;
@@ -32,6 +31,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * 获取tradingData数据使用
+ */
 @Service
 @Slf4j
 public class AsyncTaskService {
@@ -163,7 +165,7 @@ public class AsyncTaskService {
     }
 
     /**
-     * 2-
+     * 2-根据日期 获取链接
      */
     public void graspingDataV4(List<String> dateList) {
         // 创建固定大小的线程池

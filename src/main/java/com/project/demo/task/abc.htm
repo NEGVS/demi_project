@@ -1,0 +1,1995 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <link rel="shortcut icon" type="image/png" href="/public/img/favicon.png">
+    <meta name="keywords" content="期货,商品,龙虎榜,持仓,建仓,分析,对比">
+    <meta name="description" content="为广大投资者提供可视化的持仓和建仓过程分析对比">
+    <title>龙虎榜持仓建仓分析系统 | 一起看期货</title>
+    <link rel="stylesheet" href="/public/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="/public/js/jquery-3.4.1.min.js"></script>
+    <script src="/public/js/popper.min.js"></script>
+    <script src="/public/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?cf366ff27e9b2d5c226444771f625641";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    <style>
+        .wxapp_tip{
+            position: relative;
+            background-color:#ff8888;
+            border:1px solid gray;
+            border-radius: 5px;
+            box-shadow: 10px 10px 5px #888888,10px 10px 5px #888 inset;
+            z-index: 999;
+            display: none;
+        }
+        .tip_text{
+
+            font-size: 10px;
+            color: gray;
+        }
+
+        .ul_pz {
+
+            margin: 5px 0 0;
+        }
+    </style>
+</head>
+<body style="margin: 5px">
+<div style="margin:10px;width: auto; height: 20px; font-size: 16px;text-align: left;" >
+    <a href='http://17kqh.com/'>网站首页</a>
+    <a href='/'>持仓首页</a>
+    <a href='/disclaimer'>免责声明</a>
+    <a href='/privacy'>隐私声明</a>
+</div>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-6 col-md-3 col-xl-2"><a href="/chtop/20250801/">品种多空对比</a></div>
+        <div class="col-6 col-md-3 col-xl-2"><a href="/htop10/20250801/">合约多空对比</a></div>
+        <div class="col-6 col-md-3 col-xl-2"><a href="/price/20250801/">品种价格</a></div>
+        <div class="col-6 col-md-3 col-xl-2"><a href="/priceindex/20250801/">品种价格指数</a></div>
+        <div class="col-6 col-md-3 col-xl-2"><a href="/topchg/20250801/">持仓变动排行榜</a></div>
+        <div class="col-6 col-md-3 col-xl-2"><a href="/value/20250801/">合约市值排行榜</a></div>
+        <div class="col-6 col-md-3 col-xl-2"><a href="/turnover/20250801/">合约成交额排行榜</a></div>
+        <div class="col-6 col-md-3 col-xl-2"><a href="/cvaluehis/20250801/">多品种市值走势</a></div>
+        <div class="col-6 col-md-3 col-xl-2"><a href="/cturnoverhis/20250801/">多品种成交额走势</a></div>
+        <div class="col-6 col-md-3 col-xl-2"><a href="/cvaluechg/20250801/">品种资金流入排行榜</a></div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <hr>
+        </div>
+        <div class="col-12 text-center" style="margin-bottom:10px">
+				<span style="width: 328px;height: 33px;border: 1px solid;border-color: orange;vertical-align: top;overflow: hidden;display: inline-block;">
+					<input id="kw" value="" placeholder='输入"中信"，查中信期货持仓' onfocus="javascript:n()" maxlength="255" style="width: 318px;height: 32px;border: 0;padding: 0;background: transparent;outline: 0;font-size: 16px;">
+				</span>
+            <input type="button" style="width: 100px;height: 33px;color: white;letter-spacing: 1px;background: orange;border: 1px solid orange;font-size: 18px;" value="查持仓" onclick="javascrtpt:s()">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+
+            <div class="row text-center" style="background-color:#f8f8f8">
+                <div class="col-12"><b>上期所</b>&nbsp;&nbsp;<span class="tip_text"  title="交易所数据发布时间">2025-08-01 15:29:06</span></div>
+            </div>
+            <div class="row">
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/cu'>
+                                铜
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/cu2509/' title='20250801 成交量 109101'>CU2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/cu2510/' title='20250801 成交量 47719'>CU2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/cu2508/' title='20250801 成交量 26402'>CU2508</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/al'>
+                                铝
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/al2509/' title='20250801 成交量 194003'>AL2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/al2510/' title='20250801 成交量 98059'>AL2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/al2508/' title='20250801 成交量 24320'>AL2508</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/zn'>
+                                锌
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/zn2509/' title='20250801 成交量 163813'>ZN2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/zn2510/' title='20250801 成交量 72647'>ZN2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/zn2511/' title='20250801 成交量 14812'>ZN2511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/pb'>
+                                铅
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/pb2509/' title='20250801 成交量 71071'>PB2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/pb2510/' title='20250801 成交量 25166'>PB2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/pb2508/' title='20250801 成交量 3110'>PB2508</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/ru'>
+                                橡胶
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ru2509/' title='20250801 成交量 292626'>RU2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ru2601/' title='20250801 成交量 190410'>RU2601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ru2511/' title='20250801 成交量 12167'>RU2511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/fu'>
+                                燃油
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/fu2509/' title='20250801 成交量 623270'>FU2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/fu2510/' title='20250801 成交量 253719'>FU2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/fu2601/' title='20250801 成交量 99428'>FU2601</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/rb'>
+                                螺纹
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/rb2510/' title='20250801 成交量 2690968'>RB2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/rb2601/' title='20250801 成交量 430261'>RB2601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/rb2511/' title='20250801 成交量 143468'>RB2511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>线材</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/au'>
+                                黄金
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/au2510/' title='20250801 成交量 264681'>AU2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/au2512/' title='20250801 成交量 35927'>AU2512</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/au2602/' title='20250801 成交量 14803'>AU2602</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/ag'>
+                                白银
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ag2510/' title='20250801 成交量 812528'>AG2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ag2512/' title='20250801 成交量 121941'>AG2512</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ag2602/' title='20250801 成交量 71874'>AG2602</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/bu'>
+                                沥青
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/bu2509/' title='20250801 成交量 181051'>BU2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/bu2510/' title='20250801 成交量 106002'>BU2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/bu2511/' title='20250801 成交量 30850'>BU2511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/hc'>
+                                热卷
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/hc2510/' title='20250801 成交量 1126121'>HC2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/hc2601/' title='20250801 成交量 269938'>HC2601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/hc2511/' title='20250801 成交量 78105'>HC2511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/ni'>
+                                镍
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ni2509/' title='20250801 成交量 146515'>NI2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ni2510/' title='20250801 成交量 54665'>NI2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ni2508/' title='20250801 成交量 2309'>NI2508</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/sn'>
+                                锡
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/sn2509/' title='20250801 成交量 80553'>SN2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/sn2510/' title='20250801 成交量 21880'>SN2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/sn2508/' title='20250801 成交量 2031'>SN2508</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/sp'>
+                                纸浆
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/sp2509/' title='20250801 成交量 233981'>SP2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/sp2511/' title='20250801 成交量 72264'>SP2511</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/sp2601/' title='20250801 成交量 41930'>SP2601</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/ss'>
+                                不锈钢
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ss2509/' title='20250801 成交量 206399'>SS2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ss2510/' title='20250801 成交量 91194'>SS2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ss2508/' title='20250801 成交量 2059'>SS2508</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/ao'>
+                                氧化铝
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ao2509/' title='20250801 成交量 341722'>AO2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ao2601/' title='20250801 成交量 123953'>AO2601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ao2510/' title='20250801 成交量 62942'>AO2510</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/br'>
+                                丁二烯橡胶
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/br2509/' title='20250801 成交量 119289'>BR2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/br2508/' title='20250801 成交量 717'>BR2508</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/ad'>
+                                ad
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ad2511/' title='20250801 成交量 3011'>AD2511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+            </div>
+
+            <div class="row text-center" style="background-color:#f8f8f8">
+                <div class="col-12"><b>大商所</b>&nbsp;&nbsp;<span class="tip_text"  title="交易所数据发布时间">2025-08-01 15:32:16</span></div>
+            </div>
+            <div class="row">
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/a'>
+                                豆一
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/a2509/' title='20250801 成交量 125595'>A2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/a2511/' title='20250801 成交量 45595'>A2511</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/a2601/' title='20250801 成交量 18442'>A2601</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/b'>
+                                豆二
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/b2509/' title='20250801 成交量 209501'>B2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/b2511/' title='20250801 成交量 30364'>B2511</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/b2510/' title='20250801 成交量 4903'>B2510</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/c'>
+                                玉米
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/c2509/' title='20250801 成交量 692362'>C2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/c2511/' title='20250801 成交量 209856'>C2511</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/c2601/' title='20250801 成交量 79516'>C2601</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/cs'>
+                                玉米淀粉
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/cs2509/' title='20250801 成交量 130731'>CS2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/cs2511/' title='20250801 成交量 52669'>CS2511</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/cs2601/' title='20250801 成交量 10223'>CS2601</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>胶合板</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>纤维板</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/i'>
+                                铁矿石
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/i2509/' title='20250801 成交量 362408'>I2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/i2601/' title='20250801 成交量 183260'>I2601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/i2510/' title='20250801 成交量 25787'>I2510</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/j'>
+                                焦炭
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/j2509/' title='20250801 成交量 57087'>J2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/j2601/' title='20250801 成交量 21968'>J2601</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/jd'>
+                                鸡蛋
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/jd2509/' title='20250801 成交量 170014'>JD2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/jd2510/' title='20250801 成交量 81219'>JD2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/jd2511/' title='20250801 成交量 36897'>JD2511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/jm'>
+                                焦煤
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/jm2601/' title='20250801 成交量 2715243'>JM2601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/jm2509/' title='20250801 成交量 1058908'>JM2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/jm2605/' title='20250801 成交量 132759'>JM2605</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/l'>
+                                聚乙烯
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/l2509/' title='20250801 成交量 326658'>L2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/l2601/' title='20250801 成交量 122702'>L2601</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/m'>
+                                豆粕
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/m2509/' title='20250801 成交量 1491464'>M2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/m2601/' title='20250801 成交量 708457'>M2601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/m2511/' title='20250801 成交量 192115'>M2511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/p'>
+                                棕榈油
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/p2509/' title='20250801 成交量 709933'>P2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/p2601/' title='20250801 成交量 193621'>P2601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/p2605/' title='20250801 成交量 11745'>P2605</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/pp'>
+                                聚丙烯
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/pp2509/' title='20250801 成交量 264876'>PP2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/pp2601/' title='20250801 成交量 108567'>PP2601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/pp2510/' title='20250801 成交量 27310'>PP2510</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/v'>
+                                聚氯乙烯
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/v2509/' title='20250801 成交量 1366987'>V2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/v2601/' title='20250801 成交量 357126'>V2601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/v2510/' title='20250801 成交量 27265'>V2510</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/y'>
+                                豆油
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/y2509/' title='20250801 成交量 586377'>Y2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/y2601/' title='20250801 成交量 293106'>Y2601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/y2605/' title='20250801 成交量 21419'>Y2605</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/eg'>
+                                乙二醇
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/eg2509/' title='20250801 成交量 149885'>EG2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/eg2601/' title='20250801 成交量 38482'>EG2601</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>粳米</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/eb'>
+                                苯乙烯
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/eb2509/' title='20250801 成交量 311680'>EB2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/eb2510/' title='20250801 成交量 101692'>EB2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/eb2511/' title='20250801 成交量 31039'>EB2511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/pg'>
+                                液化石油气
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/pg2509/' title='20250801 成交量 91379'>PG2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/pg2510/' title='20250801 成交量 29722'>PG2510</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/lh'>
+                                生猪
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/lh2509/' title='20250801 成交量 37659'>LH2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/lh2511/' title='20250801 成交量 33196'>LH2511</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/lh2601/' title='20250801 成交量 18553'>LH2601</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>原木</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>纯苯</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+
+            <div class="row text-center" style="background-color:#f8f8f8">
+                <div class="col-12"><b>郑商所</b>&nbsp;&nbsp;<span class="tip_text"  title="交易所数据发布时间">2025-08-01 15:47:32</span></div>
+            </div>
+            <div class="row">
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>普麦</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>强麦</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/SR'>
+                                白糖
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SR509/' title='20250801 成交量 260759'>SR509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SR601/' title='20250801 成交量 123638'>SR601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SR511/' title='20250801 成交量 26076'>SR511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/CF'>
+                                棉花
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/CF509/' title='20250801 成交量 284172'>CF509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/CF601/' title='20250801 成交量 151951'>CF601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/CF511/' title='20250801 成交量 39597'>CF511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/TA'>
+                                PTA
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/TA509/' title='20250801 成交量 1000869'>TA509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/TA601/' title='20250801 成交量 387515'>TA601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/TA510/' title='20250801 成交量 46623'>TA510</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/OI'>
+                                菜油
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/OI509/' title='20250801 成交量 289149'>OI509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/OI601/' title='20250801 成交量 92410'>OI601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/OI511/' title='20250801 成交量 29289'>OI511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>早籼</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/MA'>
+                                甲醇
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/MA509/' title='20250801 成交量 680768'>MA509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/MA601/' title='20250801 成交量 173857'>MA601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/MA511/' title='20250801 成交量 41696'>MA511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/FG'>
+                                玻璃
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/FG509/' title='20250801 成交量 3219370'>FG509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/FG601/' title='20250801 成交量 1515581'>FG601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/FG511/' title='20250801 成交量 117741'>FG511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>菜籽</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/RM'>
+                                菜粕
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/RM509/' title='20250801 成交量 420472'>RM509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/RM601/' title='20250801 成交量 141329'>RM601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/RM605/' title='20250801 成交量 22120'>RM605</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>动力煤</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>粳稻</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>晚籼</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/SF'>
+                                硅铁
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SF509/' title='20250801 成交量 421364'>SF509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SF511/' title='20250801 成交量 124295'>SF511</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SF510/' title='20250801 成交量 67083'>SF510</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/SM'>
+                                锰硅
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SM509/' title='20250801 成交量 533437'>SM509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SM601/' title='20250801 成交量 143567'>SM601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SM511/' title='20250801 成交量 111031'>SM511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/CY'>
+                                棉纱
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/CY509/' title='20250801 成交量 6600'>CY509</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/AP'>
+                                苹果
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/AP510/' title='20250801 成交量 44154'>AP510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/AP601/' title='20250801 成交量 3960'>AP601</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/CJ'>
+                                干制红枣
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/CJ601/' title='20250801 成交量 287963'>CJ601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/CJ605/' title='20250801 成交量 34295'>CJ605</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/CJ509/' title='20250801 成交量 25569'>CJ509</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/UR'>
+                                尿素
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/UR509/' title='20250801 成交量 159309'>UR509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/UR601/' title='20250801 成交量 55854'>UR601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/UR511/' title='20250801 成交量 19721'>UR511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/SA'>
+                                纯碱
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SA509/' title='20250801 成交量 1840898'>SA509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SA601/' title='20250801 成交量 1278813'>SA601</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SA511/' title='20250801 成交量 339077'>SA511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/PF'>
+                                涤纶短纤
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/PF509/' title='20250801 成交量 136653'>PF509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/PF510/' title='20250801 成交量 116052'>PF510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/PF511/' title='20250801 成交量 38796'>PF511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/PK'>
+                                花生
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/PK510/' title='20250801 成交量 38811'>PK510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/PK511/' title='20250801 成交量 25484'>PK511</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/PK601/' title='20250801 成交量 3118'>PK601</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/PX'>
+                                对二甲苯
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/PX509/' title='20250801 成交量 214363'>PX509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/PX511/' title='20250801 成交量 96027'>PX511</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/PX510/' title='20250801 成交量 59469'>PX510</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/SH'>
+                                烧碱
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SH509/' title='20250801 成交量 316490'>SH509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SH510/' title='20250801 成交量 87424'>SH510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/SH511/' title='20250801 成交量 84145'>SH511</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/PR'>
+                                瓶片
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/PR510/' title='20250801 成交量 40804'>PR510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/PR509/' title='20250801 成交量 35273'>PR509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/PR508/' title='20250801 成交量 10'>PR508</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/PL'>
+                                PL
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/PL601/' title='20250801 成交量 5151'>PL601</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+            </div>
+
+            <div class="row text-center" style="background-color:#f8f8f8">
+                <div class="col-12"><b>中金所</b>&nbsp;&nbsp;<span class="tip_text"  title="交易所数据发布时间">2025-08-01 16:05:47</span></div>
+            </div>
+            <div class="row">
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/TF'>
+                                五年国债
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/TF2509/' title='20250801 成交量 94384'>TF2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/TF2512/' title='20250801 成交量 11750'>TF2512</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/TF2603/' title='20250801 成交量 283'>TF2603</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/T'>
+                                十年国债
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/T2509/' title='20250801 成交量 111481'>T2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/T2512/' title='20250801 成交量 15916'>T2512</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/IF'>
+                                股指
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/IF2509/' title='20250801 成交量 84786'>IF2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/IF2508/' title='20250801 成交量 46398'>IF2508</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/IF2512/' title='20250801 成交量 17684'>IF2512</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/IC'>
+                                中证500
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/IC2509/' title='20250801 成交量 74421'>IC2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/IC2508/' title='20250801 成交量 38529'>IC2508</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/IC2512/' title='20250801 成交量 22018'>IC2512</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/IH'>
+                                上证50
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/IH2509/' title='20250801 成交量 48490'>IH2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/IH2508/' title='20250801 成交量 22023'>IH2508</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/IH2512/' title='20250801 成交量 6656'>IH2512</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/TS'>
+                                二年国债
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/TS2509/' title='20250801 成交量 55885'>TS2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/TS2512/' title='20250801 成交量 8300'>TS2512</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/IM'>
+                                中证1000
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/IM2509/' title='20250801 成交量 185804'>IM2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/IM2508/' title='20250801 成交量 66769'>IM2508</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/IM2512/' title='20250801 成交量 43648'>IM2512</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/TL'>
+                                30年国债
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/TL2509/' title='20250801 成交量 189875'>TL2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/TL2512/' title='20250801 成交量 35950'>TL2512</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+            </div>
+
+            <div class="row text-center" style="background-color:#f8f8f8">
+                <div class="col-12"><b>能源中心</b>&nbsp;&nbsp;<span class="tip_text"  title="交易所数据发布时间">2025-08-01 15:29:06</span></div>
+            </div>
+            <div class="row">
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>原油</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/nr'>
+                                20号胶
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/nr2509/' title='20250801 成交量 160715'>NR2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/nr2510/' title='20250801 成交量 69878'>NR2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/nr2508/' title='20250801 成交量 748'>NR2508</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/lu'>
+                                低硫燃料油
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/lu2510/' title='20250801 成交量 128898'>LU2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/lu2509/' title='20250801 成交量 9454'>LU2509</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>国际铜</li>
+                        <li style="color: gray">
+                            未公布
+                        </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/ec'>
+                                集运（欧线）
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ec2510/' title='20250801 成交量 44602'>EC2510</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ec2508/' title='20250801 成交量 1040'>EC2508</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+            </div>
+
+            <div class="row text-center" style="background-color:#f8f8f8">
+                <div class="col-12"><b>广期所</b>&nbsp;&nbsp;<span class="tip_text"  title="交易所数据发布时间">2025-08-01 16:20:58</span></div>
+            </div>
+            <div class="row">
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/si'>
+                                工业硅
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/si2511/' title='20250801 成交量 329364'>SI2511</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/si2509/' title='20250801 成交量 279464'>SI2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/si2601/' title='20250801 成交量 59206'>SI2601</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/lc'>
+                                碳酸锂
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/lc2511/' title='20250801 成交量 495610'>LC2511</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/lc2509/' title='20250801 成交量 417654'>LC2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/lc2601/' title='20250801 成交量 132701'>LC2601</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+                <div class="col-3 col-md-2 col-xl-1">
+                    <ul class="list-unstyled text-center ul_pz">
+                        <li>
+                            <a href='/holding/ps'>
+                                多晶硅
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ps2511/' title='20250801 成交量 689196'>PS2511</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ps2509/' title='20250801 成交量 482107'>PS2509</a>
+                        </li>
+
+                        <li>
+                            <a href='/holding/ps2510/' title='20250801 成交量 208450'>PS2510</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/public/js/s.js"></script>
+
+    <div class="row">
+        <div class="col-12 text-center">
+            <a href="https://beian.miit.gov.cn/" target="_blank">闽ICP备05014653号</a>
+        </div>
+        <div class="col-12 text-center">屏幕分辨率至少1920x1080页面效果最佳
+            <br>
+            <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254097235'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1254097235%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script></div>
+    </div>
+</div>
+</body>
+</html>
