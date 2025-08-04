@@ -8,8 +8,6 @@
         <result property="id" column="id"/>
         <result property="ranking" column="ranking"/>
         <result property="memberName" column="memberName"/>
-        <result property="memberName2" column="memberName2"/>
-        <result property="memberName3" column="memberName3"/>
         <result property="contractCode" column="contractCode"/>
         <result property="transactionType" column="transactionType"/>
         <result property="totalVolume" column="totalVolume"/>
@@ -21,15 +19,12 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        ranking
-        , memberName, memberName3, memberName2, contractCode, transactionType, totalVolume, volumeChange, transactionDate, futuresVariety, exchangeName, created_time
+        ranking, memberName, contractCode, transactionType, totalVolume, volumeChange, transactionDate, futuresVariety, exchangeName, created_time
     </sql>
     <sql id="selectTransactionDetailsVo">
         select id,
                ranking,
                memberName,
-               memberName2,
-               memberName3,
                contractCode,
                transactionType,
                totalVolume,
@@ -81,8 +76,6 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="ranking != null">ranking,</if>
             <if test="memberName != null">memberName,</if>
-            <if test="memberName2 != null">memberName2,</if>
-            <if test="memberName3 != null">memberName3,</if>
             <if test="contractCode != null">contractCode,</if>
             <if test="transactionType != null">transactionType,</if>
             <if test="totalVolume != null">totalVolume,</if>
@@ -95,8 +88,6 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="ranking != null">#{ranking},</if>
             <if test="memberName != null">#{memberName},</if>
-            <if test="memberName2 != null">#{memberName3},</if>
-            <if test="memberName2 != null">#{memberName3},</if>
             <if test="contractCode != null">#{contractCode},</if>
             <if test="transactionType != null">#{transactionType},</if>
             <if test="totalVolume != null">#{totalVolume},</if>
@@ -109,13 +100,12 @@
     </insert>
 
     <!--批量插入客户-->
-    <insert id="insertTransactionDetailsList" parameterType="com.project.demo.code.tradingDetail.domain.TransactionDetails"
-            useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertTransactionDetailsList" parameterType="com.project.demo.code.tradingDetail.domain.TransactionDetails">
         INSERT INTO
         transaction_details (<include refid="Base_Column_List"/>)
         VALUES
         <foreach collection="list" item="x" index="index" separator=",">
-            (#{x.ranking}, #{x.memberName}, #{x.memberName3}, #{x.memberName2}, #{x.contractCode}, #{x.transactionType},
+            (#{x.ranking}, #{x.memberName},#{x.contractCode}, #{x.transactionType},
             #{x.totalVolume}, #{x.volumeChange}, #{x.transactionDate}, #{x.futuresVariety}, #{x.exchangeName},
             #{x.createdTime})
         </foreach>
@@ -126,8 +116,6 @@
         <trim prefix="SET" suffixOverrides=",">
             <if test="ranking != null">ranking = #{ranking},</if>
             <if test="memberName != null">memberName = #{memberName},</if>
-            <if test="memberName2 != null">memberName2 = #{memberName2},</if>
-            <if test="memberName3 != null">memberName3 = #{memberName3},</if>
             <if test="contractCode != null">contractCode = #{contractCode},</if>
             <if test="transactionType != null">transactionType = #{transactionType},</if>
             <if test="totalVolume != null">totalVolume = #{totalVolume},</if>

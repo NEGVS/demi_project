@@ -7,7 +7,6 @@ import java.util.Date;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -48,7 +47,7 @@ public class DemoProducts {
     private BigDecimal discountPrice;
 
     @Schema(description = "商品库存")
-    @TableField("stock")
+    @TableField("mapper/stock")
     private Integer stock;
 
     @Schema(description = "商品主图（存储文件路径或URL）")

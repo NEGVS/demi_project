@@ -36,7 +36,8 @@ knife4j:
 
 mybatis-plus:
   configuration:
-    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+#    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
       #全局主键策略，自增
@@ -46,7 +47,9 @@ jwt:
   isTest: true
 logging:
   level:
-    root: info
+    com.baomidou.mybatisplus: DEBUG
+    org.apache.ibatis.mapping: DEBUG
+    root: debug
 # 上传文件大小限制
 spring:
   web:

@@ -7,8 +7,8 @@ package com.project.demo.code.selenium.zhengZhou;
  * @ClassName TableDataExtractor
  */
 
-import com.project.demo.code.mapper.mapper.TransactionDetailsMapper;
 import com.project.demo.code.tradingDetail.domain.TransactionDetails;
+import com.project.demo.code.mapper.mapper.TransactionDetailsMapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Slf4j
 @Service
-public class TableDataExtractor {
+@Slf4j
+public class TableDataExtractor2 {
     @Resource
     TransactionDetailsMapper transactionDetailsMapper;
 
@@ -171,7 +171,7 @@ public class TableDataExtractor {
 
     public void addCommodity(String filePath) {
         if (filePath == null) {
-            filePath = "/Users/andy_mac/Documents/CodeSpace/andyProject0/demi_project/src/main/java/com/project/demo/selenium/file/aaa.htm";
+            filePath = "/Users/andy_mac/Documents/CodeSpace/andyProject0/demi_vue_boot/ruoyi-system/src/main/java/com/ruoyi/demi/selenium/file/aaa.htm";
         }
         List<TransactionDetails> transactionDetails = new ArrayList<>();
         // 提取所有品种数据
@@ -179,6 +179,8 @@ public class TableDataExtractor {
         // 输出结果
         if (allCommodities != null && !allCommodities.isEmpty()) {
             for (CommodityData commodity : allCommodities) {
+
+
                 for (FuturesData row : commodity.rows) {
                     // Transaction Type 1
                     transactionDetails.add(createSingleTransactionDetail(
@@ -219,17 +221,12 @@ public class TableDataExtractor {
                 }
             }
             int size = transactionDetails.size();
-            try {
-                System.out.println("读取数据 size:" + size);
-                int i = transactionDetailsMapper.insertTransactionDetailsList(transactionDetails);
-                if (i > 0) {
-                    log.info("insert into transaction_details success, size:{}", transactionDetails.size());
-                } else {
-                    log.error("insert into transaction_details failed, size:{}", transactionDetails.size());
-                }
-            } catch (Exception e) {
+            System.out.println("读取数据 size:" + size);
+            int i = transactionDetailsMapper.insertTransactionDetailsList(transactionDetails);
+            if (i > 0) {
+                log.info("insert into transaction_details success, size:{}", transactionDetails.size());
+            } else {
                 log.error("insert into transaction_details failed, size:{}", transactionDetails.size());
-                e.printStackTrace();
             }
 
 
@@ -237,7 +234,6 @@ public class TableDataExtractor {
             log.error("无法解析表格数据");
         }
     }
-
 
     /**
      * 创建单个交易明细
@@ -281,5 +277,23 @@ public class TableDataExtractor {
         details.setExchangeName(exchangeName);
         details.setCreatedTime(new Date());
         return details;
+    }
+
+    public static void main(String[] args) {
+        // 文件路径（替换为实际路径）
+        String filePath = "/Users/andy_mac/Documents/CodeSpace/andyProject0/demi_project/src/main/java/com/project/demo/selenium/file/aaa.htm";
+
+        // 提取所有品种数据
+        List<CommodityData> allCommodities = extractAllTableData(filePath);
+
+        // 输出结果
+        if (allCommodities != null && !allCommodities.isEmpty()) {
+            for (CommodityData commodity : allCommodities) {
+                System.out.println(commodity);
+                System.out.println("------------------------");
+            }
+        } else {
+            log.error("无法解析表格数据");
+        }
     }
 }

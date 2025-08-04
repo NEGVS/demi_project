@@ -25,16 +25,6 @@ public class TransactionDetails {
      */
     private String memberName;
 
-
-    //@Excel(name = "期货公司会员简称")
-    //@ApiModelProperty(name = "期货公司会员简称")
-    private String memberName2;
-
-
-    //@Excel(name = "期货公司会员简称")
-    //@ApiModelProperty(name = "期货公司会员简称")
-    private String memberName3;
-
     /**
      * 合约代码
      */
