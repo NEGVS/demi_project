@@ -1,4 +1,4 @@
-package com.project.demo.selenium.test;
+package com.project.demo.code.selenium.zhengZhou;
 
 /**
  * @Description
@@ -7,8 +7,8 @@ package com.project.demo.selenium.test;
  * @ClassName TableDataExtractor
  */
 
-import com.project.demo.tradingDetail.domain.TransactionDetails;
-import com.project.demo.tradingDetail.mapper.TransactionDetailsMapper;
+import com.project.demo.code.tradingDetail.domain.TransactionDetails;
+import com.project.demo.code.mapper.mapper.TransactionDetailsMapper;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;

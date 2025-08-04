@@ -1,4 +1,4 @@
-package com.project.demo.tradingDetail.domain;
+package com.project.demo.code.tradingDetail.domain;
 
 import lombok.Data;
 

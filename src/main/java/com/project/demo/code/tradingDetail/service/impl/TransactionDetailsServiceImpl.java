@@ -1,10 +1,9 @@
-package com.project.demo.tradingDetail.service.impl;
+package com.project.demo.code.tradingDetail.service.impl;
 
-import com.project.demo.tradingDetail.domain.TransactionDetails;
-import com.project.demo.tradingDetail.mapper.TransactionDetailsMapper;
-import com.project.demo.tradingDetail.service.ITransactionDetailsService;
+import com.project.demo.code.tradingDetail.domain.TransactionDetails;
+import com.project.demo.code.mapper.mapper.TransactionDetailsMapper;
+import com.project.demo.code.tradingDetail.service.ITransactionDetailsService;
 import jakarta.annotation.Resource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

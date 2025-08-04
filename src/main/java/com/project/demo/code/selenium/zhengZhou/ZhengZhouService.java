@@ -1,4 +1,4 @@
-package com.project.demo.selenium.zhengZhou;
+package com.project.demo.code.selenium.zhengZhou;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;

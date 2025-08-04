@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.project.demo.tradingDetail.mapper.TransactionDetailsMapper">
+<mapper namespace="com.project.demo.code.mapper.mapper.TransactionDetailsMapper">
 
-    <resultMap type="com.project.demo.tradingDetail.domain.TransactionDetails" id="TransactionDetailsResult">
+    <resultMap type="com.project.demo.code.tradingDetail.domain.TransactionDetails" id="TransactionDetailsResult">
         <result property="id" column="id"/>
         <result property="ranking" column="ranking"/>
         <result property="memberName" column="memberName"/>
@@ -41,7 +41,7 @@
         from transaction_details
     </sql>
 
-    <select id="selectTransactionDetailsList" parameterType="com.project.demo.tradingDetail.domain.TransactionDetails"
+    <select id="selectTransactionDetailsList" parameterType="com.project.demo.code.tradingDetail.domain.TransactionDetails"
             resultMap="TransactionDetailsResult">
         <include refid="selectTransactionDetailsVo"/>
         <where>
@@ -75,7 +75,7 @@
         ORDER BY memberName DESC
     </select>
 
-    <insert id="insertTransactionDetails" parameterType="com.project.demo.tradingDetail.domain.TransactionDetails"
+    <insert id="insertTransactionDetails" parameterType="com.project.demo.code.tradingDetail.domain.TransactionDetails"
             useGeneratedKeys="true" keyProperty="id">
         insert into transaction_details
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -109,7 +109,7 @@
     </insert>
 
     <!--批量插入客户-->
-    <insert id="insertTransactionDetailsList" parameterType="com.project.demo.tradingDetail.domain.TransactionDetails"
+    <insert id="insertTransactionDetailsList" parameterType="com.project.demo.code.tradingDetail.domain.TransactionDetails"
             useGeneratedKeys="true" keyProperty="id">
         INSERT INTO
         transaction_details (<include refid="Base_Column_List"/>)
@@ -121,7 +121,7 @@
         </foreach>
     </insert>
 
-    <update id="updateTransactionDetails" parameterType="com.project.demo.tradingDetail.domain.TransactionDetails">
+    <update id="updateTransactionDetails" parameterType="com.project.demo.code.tradingDetail.domain.TransactionDetails">
         update transaction_details
         <trim prefix="SET" suffixOverrides=",">
             <if test="ranking != null">ranking = #{ranking},</if>

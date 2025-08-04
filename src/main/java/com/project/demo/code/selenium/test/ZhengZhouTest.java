@@ -1,4 +1,4 @@
-package com.project.demo.selenium.test;
+package com.project.demo.code.selenium.test;
 
 
 import org.openqa.selenium.By;
@@ -14,7 +14,7 @@ import java.time.Duration;
  * @Date 2025/7/22 10:15
  * @ClassName seleniumTest
  */
-public class SeleniumTest {
+public class ZhengZhouTest {
     public static void main(String[] args) {
         //打开百度浏览器
         System.out.println("hello world");
@@ -23,8 +23,8 @@ public class SeleniumTest {
         //郑州商品交易所：czce.com.cn/cn/jysj/ccpm/H770304index_1.htm
         //大连商品交易所：http://www.dce.com.cn/dalianshangpin/xqsj/tjsj26/jdtj/rcjccpm/index.html
         //广州期货交易所：http://www.gfex.com.cn/gfex/rcjccpm/hqsj_tjsj.shtml
-
-        driver.get("https://www.selenium.dev/selenium/web/web-form.html");
+        String url = "http://www.czce.com.cn/cn/DFSStaticFiles/Future/2025/20250801/FutureDataHolding.htm";
+        driver.get(url);
         //获取<title></title>里面的信息
         String title = driver.getTitle();
         System.out.println("title : " + title);

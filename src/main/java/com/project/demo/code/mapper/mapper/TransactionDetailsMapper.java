@@ -1,6 +1,6 @@
-package com.project.demo.tradingDetail.mapper;
+package com.project.demo.code.mapper.mapper;
 
-import com.project.demo.tradingDetail.domain.TransactionDetails;
+import com.project.demo.code.tradingDetail.domain.TransactionDetails;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.project.demo.tradingDetail.zhengzhou;
+package com.project.demo.code.tradingDetail.zhengzhou;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;

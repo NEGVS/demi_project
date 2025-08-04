@@ -1,7 +1,7 @@
-package com.project.demo.tradingDetail.service;
+package com.project.demo.code.tradingDetail.service;
 
 
-import com.project.demo.tradingDetail.domain.TransactionDetails;
+import com.project.demo.code.tradingDetail.domain.TransactionDetails;
 
 import java.util.List;
 
