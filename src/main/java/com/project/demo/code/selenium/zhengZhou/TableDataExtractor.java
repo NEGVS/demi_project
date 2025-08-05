@@ -171,7 +171,7 @@ public class TableDataExtractor {
 
     public void addCommodity(String filePath) {
         if (filePath == null) {
-            filePath = "/Users/andy_mac/Documents/CodeSpace/andyProject0/demi_project/src/main/java/com/project/demo/selenium/file/aaa.htm";
+            filePath = "/Users/andy_mac/Documents/CodeSpace/andyProject0/demi_project/src/main/java/com/project/demo/selenium/file/aaa.txt";
         }
         List<TransactionDetails> transactionDetails = new ArrayList<>();
         // 提取所有品种数据

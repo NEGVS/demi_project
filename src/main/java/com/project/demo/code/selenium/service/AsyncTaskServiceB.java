@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.project.demo.code.domain.TradingData;
 import com.project.demo.code.mapper.TradingDataMapper;
 import com.project.demo.code.tradingDetail.domain.TransactionDetails;
@@ -73,50 +74,82 @@ public class AsyncTaskServiceB {
             options.addArguments("--headless"); // 如果需要无头模式
             options.addArguments("--no-sandbox"); // 添加此选项
             options.addArguments("--disable-dev-shm-usage"); // 添加此选项
+
+            // 禁用自动化控制特征（避免网站检测）
+            options.addArguments("--disable-blink-features=AutomationControlled");
+
             WebDriver driver = new ChromeDriver(options);
             String url_b = "http://www.czce.com.cn/cn/DFSStaticFiles/Future/2025/20250801/FutureDataHolding.htm";
-            String url_a = "/Users/andy_mac/Documents/CodeSpace/andyProject0/demi_project/src/main/java/com/project/demo/code/selenium/file/aaa.htm";
             List<TransactionDetails> insertList = new ArrayList<>();
-
             try {
                 driver.get(url_b);
-                //等待页面加载完成
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-                wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("table")));
-//                wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("body > div.type_table > div > div > table")));
+//                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
+                log.info("获取链接信息开始");
+                WebElement display = driver.findElement(By.cssSelector("body > div.date_box3 > table > tbody > tr:nth-child(3) > td:nth-child(2)"));
+                System.out.println(JSONUtil.toJsonStr(display));
+                List<WebElement> webElements = driver.findElements(By.cssSelector("body > div.date_box3 > table > tbody > tr:nth-child(3) > td:nth-child(2)"));
+                System.out.println(JSONUtil.toJsonStr(webElements));
+//
+//                WebElement table=  driver.findElement(By.cssSelector("div.date_box3 > table"));
+                // 定位所有行<tr>
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+                // 定位表格（使用更宽松的选择器，匹配date_box3下的所有table）
+                WebElement table = wait.until(ExpectedConditions.presenceOfElementLocated(
+                        By.cssSelector("div.date_box3 table") // 去掉">"，匹配所有后代table
+                ));
+                log.info("表格加载完成");
+
+                // 获取所有行<tr>
+                List<WebElement> rows = table.findElements(By.tagName("tr"));
+                log.info("共找到 {} 行数据", rows.size());
+//                List<WebElement> rows = table.findElements(By.tagName("tr"));
+
+                List<String> list = new ArrayList<>();
+                for (WebElement webElement : webElements) {
+                    // 获取当前行中的所有 <td> 元素
+                    List<WebElement> cells = webElement.findElements(By.cssSelector("body > div.date_box3 > table > tbody > tr:nth-child(3) > td:nth-child(2)"));
+                    log.info("获取链接信息：{}", cells);
+                }
+
+
+                System.out.println("页面标题: " + driver.getTitle());
+//                wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("table")));
+//                wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("body > div.type_table > div > div > table")));
+//                wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("table")));
                 // 提取表格数据
                 List<WebElement> tables = driver.findElements(By.tagName("table"));
-                for (WebElement table : tables) {
-
-                }
+//                for (WebElement table : tables) {
+//
+//                }
                 // 提取表格数据
-                for (WebElement table : tables) {
-                    String variety = table.findElement(By.cssSelector("tbody > tr:nth-child(1) > td")).getText().split("品种：")[1].split(" ")[0];
-                    List<WebElement> rows = table.findElements(By.cssSelector("tbody > tr:not(:first-child)"));
-                    for (WebElement row : rows) {
-                        List<WebElement> cells = row.findElements(By.cssSelector("td"));
-                        String[] result = new String[10];
-                        String text = cells.get(1).getText();
-                        System.out.println(text);
-                        if (cells.size() >= 10) {
-                            TransactionDetails details = new TransactionDetails();
-//                            details.setVariety(variety);
-//                            details.setDate("20250801");
-//                            details.setRank(Integer.parseInt(cells.get(0).getText()));
-//                            details.setBrokerName1(cells.get(1).getText());
-//                            details.setTradingVolume(Integer.parseInt(cells.get(2).getText().replace(",", "")));
-//                            details.setVolumeChange(Integer.parseInt(cells.get(3).getText().replace(",", "")));
-//                            details.setBrokerName2(cells.get(4).getText());
-//                            details.setBuyPosition(Integer.parseInt(cells.get(5).getText().replace(",", "")));
-//                            details.setBuyPositionChange(Integer.parseInt(cells.get(6).getText().replace(",", "")));
-//                            details.setBrokerName3(cells.get(7).getText());
-//                            details.setSellPosition(Integer.parseInt(cells.get(8).getText().replace(",", "")));
-//                            details.setSellPositionChange(Integer.parseInt(cells.get(9).getText().replace(",", "")));
-                            insertList.add(details);
-                        }
-                    }
-                }
+//                for (WebElement table : tables) {
+//                    String variety = table.findElement(By.cssSelector("tbody > tr:nth-child(1) > td")).getText().split("品种：")[1].split(" ")[0];
+//                    List<WebElement> rows = table.findElements(By.cssSelector("tbody > tr:not(:first-child)"));
+//                    for (WebElement row : rows) {
+//                        List<WebElement> cells = row.findElements(By.cssSelector("td"));
+//                        String[] result = new String[10];
+//                        String text = cells.get(1).getText();
+//                        System.out.println(text);
+//                        if (cells.size() >= 10) {
+//                            TransactionDetails details = new TransactionDetails();
+////                            details.setVariety(variety);
+////                            details.setDate("20250801");
+////                            details.setRank(Integer.parseInt(cells.get(0).getText()));
+////                            details.setBrokerName1(cells.get(1).getText());
+////                            details.setTradingVolume(Integer.parseInt(cells.get(2).getText().replace(",", "")));
+////                            details.setVolumeChange(Integer.parseInt(cells.get(3).getText().replace(",", "")));
+////                            details.setBrokerName2(cells.get(4).getText());
+////                            details.setBuyPosition(Integer.parseInt(cells.get(5).getText().replace(",", "")));
+////                            details.setBuyPositionChange(Integer.parseInt(cells.get(6).getText().replace(",", "")));
+////                            details.setBrokerName3(cells.get(7).getText());
+////                            details.setSellPosition(Integer.parseInt(cells.get(8).getText().replace(",", "")));
+////                            details.setSellPositionChange(Integer.parseInt(cells.get(9).getText().replace(",", "")));
+//                            insertList.add(details);
+//                        }
+//                    }
+//                }
             } catch (Exception e) {
                 log.error("处理交易数据失败: {}", e.getMessage(), e);
             } finally {
