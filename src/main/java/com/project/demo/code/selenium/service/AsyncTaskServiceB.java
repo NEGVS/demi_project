@@ -7,11 +7,15 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.project.demo.code.domain.TradingData;
 import com.project.demo.code.mapper.TradingDataMapper;
-import com.project.demo.code.tradingDetail.domain.TransactionDetails;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -23,7 +27,11 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,8 +42,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
+/**
+ * 在用
+ * 抓取数据 郑州、广州
+ */
 @Service
 @Slf4j
 public class AsyncTaskServiceB {
@@ -68,93 +79,107 @@ public class AsyncTaskServiceB {
                 mail = "andyfaupassion@gmail.com";
                 log.info("异步任务入参为空，使用默认参数 mail: andyfaupassion@gmail.com");
             }
+
+
             // 获取所有的链接
             long startTime = System.currentTimeMillis();
+            // 设置 ChromeDriver 路径（根据实际路径调整）
+//            System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless"); // 如果需要无头模式
+//            options.addArguments("--headless"); // 如果需要无头模式，禁用 Headless 模式：//某些网站对 headless 浏览器有检测，尝试禁用 --headless 测试
+
+            options.addArguments("--disable-extensions");
+            options.addArguments("--start-maximized");
+            options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.7204.184 Safari/537.36");
+
             options.addArguments("--no-sandbox"); // 添加此选项
             options.addArguments("--disable-dev-shm-usage"); // 添加此选项
+            options.addArguments("--disable-gpu");
+//处理 Cookies 或登录：
+//检查是否需要登录或设置 Cookies。如果需要，模拟登录流程：
+//javadriver.get("http://www.czce.com.cn");
+//// 添加登录代码（如填写表单、点击登录按钮）
 
             // 禁用自动化控制特征（避免网站检测）
             options.addArguments("--disable-blink-features=AutomationControlled");
-
+            options.addArguments("--start-maximized");
+            options.addArguments("--window-size=1920,1080");
+            options.addArguments("--lang=zh-CN");
             WebDriver driver = new ChromeDriver(options);
+
+
+
+
             String url_b = "http://www.czce.com.cn/cn/DFSStaticFiles/Future/2025/20250801/FutureDataHolding.htm";
-            List<TransactionDetails> insertList = new ArrayList<>();
+//            List<TransactionDetails> insertList = new ArrayList<>();
+            List<String> insertList = new ArrayList<>();
             try {
+                driver.get("http://www.czce.com.cn");
                 driver.get(url_b);
-//                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+                // 等待页面加载
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+                wait.until(driver2 -> ((JavascriptExecutor) driver2)
+                        .executeScript("return document.readyState").equals("complete"));
 
-                log.info("获取链接信息开始");
-                WebElement display = driver.findElement(By.cssSelector("body > div.date_box3 > table > tbody > tr:nth-child(3) > td:nth-child(2)"));
-                System.out.println(JSONUtil.toJsonStr(display));
-                List<WebElement> webElements = driver.findElements(By.cssSelector("body > div.date_box3 > table > tbody > tr:nth-child(3) > td:nth-child(2)"));
-                System.out.println(JSONUtil.toJsonStr(webElements));
-//
-//                WebElement table=  driver.findElement(By.cssSelector("div.date_box3 > table"));
-                // 定位所有行<tr>
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+                // 保存页面源码
+                String pageSource = driver.getPageSource();
+                Files.writeString(Paths.get("page_source.html"), pageSource, StandardCharsets.UTF_8);
 
-                // 定位表格（使用更宽松的选择器，匹配date_box3下的所有table）
-                WebElement table = wait.until(ExpectedConditions.presenceOfElementLocated(
-                        By.cssSelector("div.date_box3 table") // 去掉">"，匹配所有后代table
-                ));
-                log.info("表格加载完成");
-
-                // 获取所有行<tr>
-                List<WebElement> rows = table.findElements(By.tagName("tr"));
-                log.info("共找到 {} 行数据", rows.size());
-//                List<WebElement> rows = table.findElements(By.tagName("tr"));
-
-                List<String> list = new ArrayList<>();
-                for (WebElement webElement : webElements) {
-                    // 获取当前行中的所有 <td> 元素
-                    List<WebElement> cells = webElement.findElements(By.cssSelector("body > div.date_box3 > table > tbody > tr:nth-child(3) > td:nth-child(2)"));
-                    log.info("获取链接信息：{}", cells);
+                // 检查 iframe
+                List<WebElement> iframes = driver.findElements(By.tagName("iframe"));
+                log.info("iframe 数量: " + iframes.size());
+                if (!iframes.isEmpty()) {
+                    for (int i = 0; i < iframes.size(); i++) {
+                        driver.switchTo().defaultContent();
+                        driver.switchTo().frame(i);
+                        log.info("检查 iframe " + i + " 内容");
+                        String iframeSource = driver.getPageSource();
+                        Files.writeString(Paths.get("iframe_source_" + i + ".html"), iframeSource, StandardCharsets.UTF_8);
+                        try {
+                            WebElement display = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                                    By.cssSelector("table tr:nth-child(3) td:nth-child(2)")));
+                            log.info("在 iframe " + i + " 中找到目标元素: " + display.getText());
+                            break;
+                        } catch (TimeoutException e) {
+                            log.warn("iframe " + i + " 中未找到元素");
+                        }
+                    }
+                } else {
+                    log.warn("未找到 iframe，使用主页面");
                 }
 
-
-                System.out.println("页面标题: " + driver.getTitle());
-//                wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("table")));
-//                wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("body > div.type_table > div > div > table")));
-//                wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("table")));
-                // 提取表格数据
+                // 检查表格
                 List<WebElement> tables = driver.findElements(By.tagName("table"));
-//                for (WebElement table : tables) {
-//
-//                }
-                // 提取表格数据
-//                for (WebElement table : tables) {
-//                    String variety = table.findElement(By.cssSelector("tbody > tr:nth-child(1) > td")).getText().split("品种：")[1].split(" ")[0];
-//                    List<WebElement> rows = table.findElements(By.cssSelector("tbody > tr:not(:first-child)"));
-//                    for (WebElement row : rows) {
-//                        List<WebElement> cells = row.findElements(By.cssSelector("td"));
-//                        String[] result = new String[10];
-//                        String text = cells.get(1).getText();
-//                        System.out.println(text);
-//                        if (cells.size() >= 10) {
-//                            TransactionDetails details = new TransactionDetails();
-////                            details.setVariety(variety);
-////                            details.setDate("20250801");
-////                            details.setRank(Integer.parseInt(cells.get(0).getText()));
-////                            details.setBrokerName1(cells.get(1).getText());
-////                            details.setTradingVolume(Integer.parseInt(cells.get(2).getText().replace(",", "")));
-////                            details.setVolumeChange(Integer.parseInt(cells.get(3).getText().replace(",", "")));
-////                            details.setBrokerName2(cells.get(4).getText());
-////                            details.setBuyPosition(Integer.parseInt(cells.get(5).getText().replace(",", "")));
-////                            details.setBuyPositionChange(Integer.parseInt(cells.get(6).getText().replace(",", "")));
-////                            details.setBrokerName3(cells.get(7).getText());
-////                            details.setSellPosition(Integer.parseInt(cells.get(8).getText().replace(",", "")));
-////                            details.setSellPositionChange(Integer.parseInt(cells.get(9).getText().replace(",", "")));
-//                            insertList.add(details);
-//                        }
-//                    }
-//                }
+                log.info("找到表格数量: " + tables.size());
+                tables.forEach(table -> log.info("表格内容: " + table.getText()));
+
+                // 尝试查找元素
+                WebElement display = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                        By.cssSelector("table tr:nth-child(3) td:nth-child(2)")));
+                String elementText = display.getText();
+                System.out.println("元素内容: " + JSONUtil.toJsonStr(elementText));
+
+                // 获取多个元素
+                List<WebElement> webElements = driver.findElements(
+                        By.cssSelector("table tr:nth-child(3) td:nth-child(2)"));
+                webElements.forEach(element -> insertList.add(element.getText()));
+                System.out.println("元素列表: " + JSONUtil.toJsonStr(insertList));
+
+
+            } catch (NoSuchElementException e) {
+                System.err.println("无法定位元素: " + e.getMessage());
+                // 保存页面源码和截图
+                System.out.println("页面源码: " + driver.getPageSource());
+                File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+//                FileUtils.copyFile(screenshot, new File("screenshot.png"));
             } catch (Exception e) {
-                log.error("处理交易数据失败: {}", e.getMessage(), e);
+                System.err.println("无法定位元素: " + e.getMessage());
+                // 保存页面源码和截图
+                System.out.println("页面源码: " + driver.getPageSource());
+                System.err.println("处理交易数据失败: " + e.getMessage() + e);
+                e.printStackTrace();
             } finally {
                 driver.quit();
-                log.info("WebDriver 已关闭");
             }
         } catch (Exception e) {
             log.error("处理交易数据失败: {}", e.getMessage(), e);

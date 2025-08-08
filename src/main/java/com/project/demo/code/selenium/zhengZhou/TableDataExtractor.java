@@ -101,6 +101,11 @@ public class TableDataExtractor {
         }
     }
 
+    /**
+     * 从html中提取数据
+     * @param filePath filePath
+     * @return List<CommodityData>
+     */
     public static List<CommodityData> extractAllTableData(String filePath) {
         List<CommodityData> allCommodities = new ArrayList<>();
         try {
@@ -169,14 +174,19 @@ public class TableDataExtractor {
         }
     }
 
+    /**
+     * 从htm文件中读取郑州期货交易所数据，并插入到数据库
+     * @param filePath
+     */
     public void addCommodity(String filePath) {
         if (filePath == null) {
             filePath = "/Users/andy_mac/Documents/CodeSpace/andyProject0/demi_project/src/main/java/com/project/demo/selenium/file/aaa.txt";
         }
+        //保存数据
         List<TransactionDetails> transactionDetails = new ArrayList<>();
         // 提取所有品种数据
         List<CommodityData> allCommodities = extractAllTableData(filePath);
-        // 输出结果
+        // 组装数据
         if (allCommodities != null && !allCommodities.isEmpty()) {
             for (CommodityData commodity : allCommodities) {
                 for (FuturesData row : commodity.rows) {
