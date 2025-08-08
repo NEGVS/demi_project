@@ -1,3 +1,23 @@
+分别拉取4个期货交易所每天期货品种交易持仓数据
+
+上海期货交易所：https://www.shfe.com.cn/reports/tradedata/dailyandweeklydata/
+已经ok
+郑州商品交易所：http://www.czce.com.cn/cn/jysj/ccpm/H770304index_1.htm
+需要手动导出数据
+大连商品交易所：http://www.dce.com.cn/dalianshangpin/xqsj/tjsj26/jdtj/rcjccpm/index.html
+已经ok
+广州期货交易所：http://www.gfex.com.cn/gfex/rcjccpm/hqsj_tjsj.shtml
+进行中
+----
+
+http://www.gfex.com.cn/u/interfacesWebTiMemberDealPosiQuotes/loadList
+trade_date=20250806&trade_type=0&variety=si&contract_id=si2509&data_type=3
+http://www.gfex.com.cn/u/interfacesWebTiMemberDealPosiQuotes/loadList
+trade_date=20250806&trade_type=0&variety=si&contract_id=si2509&data_type=2
+http://www.gfex.com.cn/u/interfacesWebTiMemberDealPosiQuotes/loadList
+trade_date=20250806&trade_type=0&variety=si&contract_id=si2509&data_type=1
+
+------
 问题分析
 根据你的反馈，目标元素可能位于 <iframe> 内，这会导致 Selenium 的 CSS 选择器 body > div.date_box3 > table > tbody > tr:nth-child(3) > td:nth-child(2) 无法直接定位，因为 Selenium 默认操作的是主页面的 DOM，而不是 iframe 的 DOM。以下是详细的解决方案，使用中文说明如何处理 <iframe> 中的元素
 

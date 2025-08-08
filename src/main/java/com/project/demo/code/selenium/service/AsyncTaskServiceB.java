@@ -108,14 +108,17 @@ public class AsyncTaskServiceB {
             WebDriver driver = new ChromeDriver(options);
 
 
+//            广州期货交易所：http://www.gfex.com.cn/gfex/rcjccpm/hqsj_tjsj.shtml
+//          郑州  String url_b = "http://www.czce.com.cn/cn/DFSStaticFiles/Future/2025/20250801/FutureDataHolding.htm";
 
 
-            String url_b = "http://www.czce.com.cn/cn/DFSStaticFiles/Future/2025/20250801/FutureDataHolding.htm";
+//            String url_zz = "http://www.czce.com.cn/cn/jysj/ccpm/H770304index_1.htm";
+            String url_zz = "http://www.gfex.com.cn/gfex/rcjccpm/hqsj_tjsj.shtml";
 //            List<TransactionDetails> insertList = new ArrayList<>();
             List<String> insertList = new ArrayList<>();
             try {
-                driver.get("http://www.czce.com.cn");
-                driver.get(url_b);
+//                driver.get("http://www.czce.com.cn");
+                driver.get(url_zz);
                 // 等待页面加载
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
                 wait.until(driver2 -> ((JavascriptExecutor) driver2)
@@ -165,7 +168,8 @@ public class AsyncTaskServiceB {
                 webElements.forEach(element -> insertList.add(element.getText()));
                 System.out.println("元素列表: " + JSONUtil.toJsonStr(insertList));
 
-
+                System.out.println("页面源码: " + driver.getPageSource());
+                File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             } catch (NoSuchElementException e) {
                 System.err.println("无法定位元素: " + e.getMessage());
                 // 保存页面源码和截图
