@@ -1,4 +1,4 @@
-package com.project.demo.code.tradingDetail;
+package com.project.demo.code.tradingDetail.domain;
 
 public enum TransactionTypeEnum {
 
