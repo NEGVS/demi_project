@@ -5,17 +5,36 @@
 郑州商品交易所：http://www.czce.com.cn/cn/jysj/ccpm/H770304index_1.htm
 需要手动导出数据
 大连商品交易所：http://www.dce.com.cn/dalianshangpin/xqsj/tjsj26/jdtj/rcjccpm/index.html
-已经ok
-广州期货交易所：http://www.gfex.com.cn/gfex/rcjccpm/hqsj_tjsj.shtml
 进行中
+广州期货交易所：http://www.gfex.com.cn/gfex/rcjccpm/hqsj_tjsj.shtml
+已经ok
 ----
+今日目标；拉取大连的数据
+http://www.dce.com.cn/dalianshangpin/xqsj/tjsj26/jdtj/rcjccpm/index.html
+解决方法，1-导出压缩包，2-导入系统进行解析。
 
-http://www.gfex.com.cn/u/interfacesWebTiMemberDealPosiQuotes/loadList
-trade_date=20250806&trade_type=0&variety=si&contract_id=si2509&data_type=3
-http://www.gfex.com.cn/u/interfacesWebTiMemberDealPosiQuotes/loadList
-trade_date=20250806&trade_type=0&variety=si&contract_id=si2509&data_type=2
-http://www.gfex.com.cn/u/interfacesWebTiMemberDealPosiQuotes/loadList
-trade_date=20250806&trade_type=0&variety=si&contract_id=si2509&data_type=1
+请求防止和参数
+http://www.dce.com.cn/publicweb/quotesdata/exportMemberDealPosiQuotesBatchData.html
+参数
+memberDealPosiQuotes.variety=b&memberDealPosiQuotes.trade_type=0&contract.contract_id=b2509&contract.variety_id=b&year=2025&month=7&day=07&batchExportFlag=batch
+请求头
+POST /publicweb/quotesdata/exportMemberDealPosiQuotesBatchData.html HTTP/1.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate
+Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
+Cache-Control: max-age=0
+Content-Length: 160
+Content-Type: application/x-www-form-urlencoded
+Cookie: JSESSIONID=D9911CA87C37D9C31D65B20FDEDC27F0; hNUS9DnJtejwS=60H1A2qnmPqH_hl7kmXuAT6pAEKU_7YDqUcRNdA2c4WXSqy0jIxi6US5IpMz_dP.YlG1WiQp5evEwEyi09ckXJdq; Hm_lvt_a50228174de2a93aee654389576b60fb=1754284594; HMACCOUNT=A13C01A2DEF301AA; Hm_lpvt_a50228174de2a93aee654389576b60fb=1754631241; hNUS9DnJtejwT=0MYQ2qHwDR_6l8ntZcxn0wTgMDfE4AHpu7nhZxu7m9438RiVNtbspM8BRwX5j5epFQzXxVnn_DWdUJm1hU9_o34ugK_jJNATdD.l2Q7adM_KPTmCrnX1lRWYXvJBGsq9c7PBJm14Qsnxf1Nw1Xco9UePhA3nU3BgvgcPhScapbrhvSWOB8vEuoUmwTNkK5AfmwyVM2FV1TAbfL01nvcIqgVBlMM8BH93kspoLB1jzAAZdj6gp4UkQY3ia.UhX1Eh.0Q3B.PkuxjZBWvDA.C3fd5FACd6Yo3j29VwNfhMDo3X2mFGKGMHDupNXvl5X4J7x1cmGBUUNr4WZVSqYBY4YAzRvd0IwaOMP3a_CWoeCoZo5cmyuKIB_yolgD9VMMxYlUpSiFV2LKx5dmqzwCA5EDkbd_9FQZm2hwUo9zaoUm9i4ZV1tTq6.rA5m5GJF55RHUFAatecCKBFvJoL8YlkH8AYdtOaVuayJ0K1ljOi5t_9
+Host: www.dce.com.cn
+Origin: http://www.dce.com.cn
+Proxy-Connection: keep-alive
+Referer: http://www.dce.com.cn/publicweb/quotesdata/memberDealPosiQuotes.html
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36
+
+郑州商品交易所：http://www.czce.com.cn/cn/jysj/ccpm/H770304index_1.htm
+需要手动导出数据
 
 ------
 问题分析

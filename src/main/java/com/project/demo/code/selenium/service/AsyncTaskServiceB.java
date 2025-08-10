@@ -107,18 +107,18 @@ public class AsyncTaskServiceB {
             options.addArguments("--lang=zh-CN");
             WebDriver driver = new ChromeDriver(options);
 
+//            selenium
 
 //            广州期货交易所：http://www.gfex.com.cn/gfex/rcjccpm/hqsj_tjsj.shtml
 //          郑州  String url_b = "http://www.czce.com.cn/cn/DFSStaticFiles/Future/2025/20250801/FutureDataHolding.htm";
 
 
-//            String url_zz = "http://www.czce.com.cn/cn/jysj/ccpm/H770304index_1.htm";
-            String url_zz = "http://www.gfex.com.cn/gfex/rcjccpm/hqsj_tjsj.shtml";
+            String url_dalian = "http://www.dce.com.cn/dalianshangpin/xqsj/tjsj26/jdtj/rcjccpm/index.html";
 //            List<TransactionDetails> insertList = new ArrayList<>();
             List<String> insertList = new ArrayList<>();
             try {
 //                driver.get("http://www.czce.com.cn");
-                driver.get(url_zz);
+                driver.get(url_dalian);
                 // 等待页面加载
                 WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
                 wait.until(driver2 -> ((JavascriptExecutor) driver2)
